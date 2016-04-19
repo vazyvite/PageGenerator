@@ -1,0 +1,56 @@
+$largeurTab: 150px;
+$hauteurTab: 86px;
+$positionLeft: 500px;
+$positionTop: 88px;
+
+.nav {
+	&.nav-tabs {
+		position: fixed;
+		z-index: 9;
+		left: $positionLeft;
+		top: 2px;
+		width: calc(100% - #{$positionLeft});
+		padding-left: 47px;
+
+		& > li {
+			height: $hauteurTab;
+			width: calc(100% / 6);
+			text-align: center;
+
+			&:first-child > a {
+				border-left-width: 1px;
+			}
+
+			&:last-child > a {
+				border-right-width: 1px;
+			}
+
+			& > a {
+				height: $hauteurTab;
+				width: 100%;
+				padding-top: 22px;
+				border: 1px solid $color_gris_border;
+				border-radius: 0;
+				background-color: $color_gris_blanc;
+				border-width: 0;
+				color: $color_noir;
+				text-transform: uppercase;
+			}
+
+			&.active > a {
+				border-width: 1px 1px 0 1px;
+				background-color: $color_blanc!important;
+				box-shadow: 0 3px 0 0;
+				color: $color_bleu1;
+			}
+		}
+	}
+}
+
+.tab-content {
+	position: fixed;
+	top: $positionTop;
+	width: 100%;
+	left: 0;
+	height: calc(100% - #{$positionTop});
+}

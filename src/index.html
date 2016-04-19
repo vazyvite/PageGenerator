@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head lang="fr">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="Console PSL" />
+		<meta name="author" content="Jonathan Jacques" />
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48 64x64" href="css/images/favicon.ico" />
+    </head>
+    <body>
+		<header class="row">
+			<h1>
+				Page Generator
+				<span class="dila-circle indigo"></span>
+				<span class="dila-circle orange"></span>
+				<span class="dila-circle violet"></span>
+				<span class="dila-circle rose"></span>
+				<span class="dila-circle bleu1"></span>
+				<span class="dila-circle emeraude"></span>
+				<span class="dila-circle rouge"></span>
+				<span class="dila-circle bleu2"></span>
+			</h1>
+
+			<div class="action">
+				<button id="btnGenerate" class="btn btn-primary"><span class="glyphicon glyphicon-flash"></span> Générer</button>
+				<button id="btnReset" class="btn btn-default" title="Réinitialiser"><span class="glyphicon glyphicon-refresh"></span> <span class="sr-only">Réinitialiser</span></button>
+				<button id="btnCommit" class="btn btn-default" disabled title="Commiter"><span class="glyphicon glyphicon-paste"></span> <span class="sr-only">Commiter</span></button>
+			</div>
+		</header>
+
+		<main>
+			<div>
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#tabAtelier" aria-controls="tabAtelier" role="tab" data-toggle="tab">Atelier</a></li>
+					<li role="presentation"><a href="#tabHtml" aria-controls="tabHtml" role="tab" data-toggle="tab">HTML</a></li>
+					<li role="presentation"><a href="#tabJava" aria-controls="tabJava" role="tab" data-toggle="tab">Java</a></li>
+					<li role="presentation"><a href="#tabViewXml" aria-controls="tabViewXml" role="tab" data-toggle="tab">view.xml</a></li>
+					<li role="presentation"><a href="#tabDemarcheFlow" aria-controls="tabDemarcheFlow" role="tab" data-toggle="tab">demarche-flow</a></li>
+					<li role="presentation"><a href="#tabProperties" aria-controls="settings" role="tab" data-toggle="tab">properties</a></li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="tabAtelier">
+						<div class="menu"></div>
+						<div class="atelier-content onglet-content">
+							<div class="atelier-page"></div>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="tabHtml">
+						<div class="html-content onglet-content">
+							<div class="html-page"></div>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="tabJava">
+						<div class="java-content onglet-content">
+							<div class="java-page"></div>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="tabViewXml">
+						<div class="view-content onglet-content">
+							<div class="view-page"></div>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="tabDemarcheFlow">
+						<div class="flow-content onglet-content">
+							<div class="flow-page"></div>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="tabProperties">
+						<div class="messages-content onglet-content">
+							<div class="messages-page"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<script type="text/javascript">
+			var app = {
+				core: {}
+			};
+		</script>
+		<script type="text/javascript" src="js/libs/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/action/Validation.js"></script>
+		<script type="text/javascript" src="js/action/Modal.js"></script>
+		<script type="text/javascript" src="js/model/Page.js"></script>
+		<script type="text/javascript" src="js/model/Option.js"></script>
+		<script type="text/javascript" src="js/model/Infobulle.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+    </body>
+</html>

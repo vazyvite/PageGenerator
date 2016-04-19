@@ -1,0 +1,91 @@
+#tabAtelier {
+	.menu {
+		position: absolute;
+		width: 150px;
+		background-color: $color_gris3;
+		height: 100%;
+		padding: 15px;
+
+		.item {
+			color: $color_blanc;
+			margin: auto;
+			padding: 0 5px;
+			width: 75px;
+			height: 75px;
+			border: 1px double $color_gris5;
+			border-radius: 3px;
+			cursor: -webkit-grab;
+			margin-bottom: 3px;
+
+			&:focus {
+				outline: $color_bleu_clair auto 5px;
+				outline-offset: -2px;
+			}
+
+			& > span {
+				display: block;
+				padding-top: 30%;
+				text-align: center;
+			}
+		}
+	}
+
+	.atelier-content {
+		left: 150px;
+		width: calc(100% - 150px);
+
+		.atelier-page {
+			margin: 50px 50px 10px 50px;
+			min-height: 400px;
+			width: calc(100% - 100px);
+			background-color: $color_blanc;
+			box-shadow: 0 3px 10px 0 $color_noir_alpha_20;
+			padding: 15px;
+			border-radius: 3px;
+
+			.dropbag {
+				border: 1px solid $color_bleu1;
+				min-height: 30px;
+				width: 100%;
+				background-color: $color_blanc;
+				margin: 3px 0;
+				padding: 0 15px;
+				border-radius: 3px;
+				text-align: center;
+
+				&.dragover {
+					outline: $color_bleu1 auto 5px;
+					outline-offset: -2px;
+
+					&:before {
+						content: "Déposer l'élément ici";
+						text-align: center;
+						display: block;
+						padding-top: 5px;
+						font-weight: bold;
+						color: $color_gris_border;
+					}
+				}
+			}
+
+			.page-line {
+				height: 34px;
+
+				span {
+					height: 34px;
+					display: inline-block;
+					padding-top: 7px;
+				}
+				button {
+					display: none;
+				}
+				&:hover,
+				&:focus {
+					button {
+						display: inline;
+					}
+				}
+			}
+		}
+	}
+}

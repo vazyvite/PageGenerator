@@ -1,0 +1,49 @@
+UIPage
+	idPage: l'iddentifiant de la page (non utilisé dans un premier temps)
+	prefixMsg: le préfix de message de properties générique de la page
+	description: la description de la page (en guise de commentaire HTML)
+	view: {
+		model: le nom du modèle Java (variable demarche-flow)
+		idView: le nom de la vue
+		idXiti: l'identifiant xiti de la page
+	}
+	pattern: {
+		header: le pattern du header du contenu de la page
+		footer: le pattern du footer du contenu de la page
+	}
+	lines: [UIStructure]
+	
+UIStructure
+	cols: [UIElement] 1..3
+	
+UIElement
+	idElement: l'identifiant de l'élément (non utilisé dans un premier temps)
+	prefixElt: le préfix de message de properties générique de l'élément
+	attribut: {Attribut}
+	validation: [Validation]
+	type: (text|bloc|form|composant) le type d'UIElement
+	pattern: le pattern HTML associé à l'UIElement
+	simplePattern: le pattern simple (de construction) de l'UIElement
+	options: {Option}
+	
+Attribut
+	name: le nom de l'attribut
+	specName: le nom de l'attribut dans la spécification
+	type: le type de données associé à l'attribut
+	description: la description de l'attribut (pour commentaire Java / HTML)
+	
+Validation
+	name: le nom de la validation
+	annotation: {Annotation}
+	
+Annotation
+	name: le nom de l'annotation Java associée
+	suffixMsg: le suffix de message de properties associé au message d'erreur de l'annotation
+	pattern: le pattern textuel de l'annotation
+	
+Option
+	obligatoire: indique si le champ est obligatoire
+	desactive: indique si le champ est desactivé
+	classes: [String] la liste des classes associées à l'élément
+	attrs: [Map] la liste des attribut et leurs valeurs associés à l'élément
+	

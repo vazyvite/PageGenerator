@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org" lang="fr">
+	<body tiles:fragment="content">
+		<form th:object="${{{model}}}" th:action="${flowExecutionUrl}" method="post" novalidate="novalidate" data-page="{{idPage}}">
+
+			<!-- Bloc d'affichage des messages d'erreur -->
+			<div class="alert alert-bloc alert-danger" role="alert" th:classappend="${#fields.hasErrors('*')}? 'alert-visible' :'alert-invisible'">
+				<span th:each="err : ${#fields.errors('*')}">
+					<span th:text="${err}"></span><br />
+				</span>
+			</div>
+
+			<!-- Note informative champs obligatoires -->
+			<p class="note" th:utext="#{psl.commun.obligatoire}"></p>
+
+			<!-- H2 Titre de la page -->
+			<h2 th:text="#{{{prefixDemarche}}.{{prefixPage}}.titre.budgetPrevisionnel}"></h2>
+
+			{{content}}
+
+			<!-- Navigation -->
+			<div th:include="templates/navigationComposant::classique (precedent=true, save=true, suivant=true)"></div>
+		</form>
+	</body>
+</html>

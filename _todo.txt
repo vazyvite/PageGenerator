@@ -1,0 +1,58 @@
+Evolutions(000)
+---------------------------------------
+EVO001 - L'interface doit présenter le titre de l'application
+EVO002 - L'interface doit présenter la liste des onglets Atelier, HTML, Java, view.xml, demarche-flow, messages.properties
+EVO003 - L'onglet Atelier doit me présenter une page contenant une UIPage initialiée grâce au template HTML de page
+EVO004 - Le template HTML de page doit être représentatif d'une page générique
+EVO005 - Un menu doit présenter les UIElements disponibles à ajouter dans la page
+EVO006 - L'utilisateur doit pouvoir glisser / déposer ses UIElements dans la page
+EVO007 - L'utilisateur doit pouvoir supprimer un UIElement de la page (après confirmation)
+EVO008 - L'utilisateur doit pouvoir déplacer un UIElement dans la page par glisser / déposer
+EVO009 - L'utilisateur doit pouvoir modifier un UIElement déjà positionné dans la page
+EVO010 - Un UIElement de type form est positionnable sur un UIElement de type bloc
+EVO011 - Un UIElement de type composant est positionnable sur un UIElement de type racine ou bloc
+EVO012 - Un UIElement de type text est positionnable sur un UIElement de type bloc ou racine
+EVO013 - Un UIElement de type bloc est positionnable sur un UIElement de type racine
+EVO014 - Le template (haut) de la page contient un titre, un bloc de messages d'erreur et un message (optionnel) pour les champs obligatoires
+EVO015 - le message présentant les champs obligatoires du template (haut) n'est généré que si au moins 1 champ est obligatoire
+EVO016 - Le template (bas) de la page contient un composant navigation avec tous les paramètres à true par défaut
+EVO017 - Lorsque l'utilisateur glisse un élément sur la page, ce dernier doit y être visible et son pattern généré lors de la génération
+EVO018 - Lorsque l'utilisateur clique sur le bouton générer, tous les UIElements doivent être générés
+EVO019 - Un bouton générer doit être présent dans le menu général de la page
+EVO020 - Un bouton reset doit être présent dans le menu général de la page
+EVO021 - Un clic sur le bouton reset, réinitialise toutes les modifications effectuées (après validation de l'action par l'utilisateur)
+EVO022 - Lorsque l'utilisateur survol un UIElement positioné sur la page, une option de suppression, de modification et de déplacement apparaissent
+EVO023 - Lorsque l'utilisateur glisse un UIElement sur la page, une popup de paramètrage apparait
+EVO024 - Lorsque l'utilisateur clic sur le bouton de modification d'un UIElement, la popup de paramètrage apparait prérenseignée avec les options déjà cochées pour l'UIElement
+EVO025 - Les options présentées ne sont pas les mêmes selon les types d'UIElement dans la popup de paramètrage
+EVO026 - Les UIElements de type text ont les options suivantes: prefix
+EVO027 - Les UIElements de type bloc ont les options suivantes: 
+EVO028 - Les UIElements de type form ont les options suivantes: (voir spec)
+EVO029 - Les UIElements de type composant ont les options suivantes: (paramétrés selon chaque composant) + gestion des dépendances
+EVO030 - La page gère une liste de dépendances liées aux JS requis pour le bon fonctionnement des composants
+EVO031 - L'onglet HTLM doit me présenter le résultat de la génération HTML de la page
+EVO032 - Lorsque l'utilisateur clique sur le bouton de génération, il est automatiquement redirigé vers l'onglet HTML
+EVO032 - L'onglet Java doit me présenter le résultat de la génération Java du modèle ainsi que le contenu à insérer dans le teleDeclaration.java
+EVO033 - L'onglet view.xml doit me présenter le résultat de la génération XML de la définition de la vue
+EVO034 - L'onglet demarche-flow.xml doit me présenter le résultat de la génération XML de la définition webflow de la vue
+EVO035 - L'onglet messages.properties doit me présenter le résultat de la génération de tous les messages.properties de la page
+EVO036 - La page doit traiter la liste des messages properties présents
+EVO037 - Un champ peut être obligatoire ou non
+EVO038 - Un champ peut être désactivé ou non
+EVO039 - Un champ peut voir sa largeur (bootstrap) être modifiée (12|6|4)
+EVO040 - Le commit envoi les modifications dans les fichiers correspondants
+EVO041 - L'EVO040 nécessite l'identification du projet par le biais d'options supplémentaires
+EVO042 - Ajout d'un bouton Commit activé uniquement après génération et hors de toute modification dans le menu principal de l'application pour le support de l'EVO040
+EVO043 - L'application doit générer au mieux les relations RGAA entre les éléments (critères à définir)
+
+Anomalies(000)
+---------------------------------------
+
+
+
+Annulés
+---------------------------------------
+
+
+Releases Notes
+---------------------------------------

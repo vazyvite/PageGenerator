@@ -1,0 +1,39 @@
+* {
+	font-family: Roboto;
+//	font-family: Arial;
+}
+
+body {
+	overflow-x: hidden;
+}
+
+main {
+	position: relative;
+	z-index: 1;
+	max-height: 955px;
+	overflow-y: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: $color_bleu1;
+	font-family: Roboto-thin;
+}
+h2 {
+	border-bottom: 1px dashed #4D96D2;
+	margin-bottom: 30px;
+}
+h3 {
+	margin-top: 0;
+}
+
+summary {
+	cursor: pointer;
+	h1,h2,h3,h4,h5,h6 {
+		display: inline-block;
+	}
+}

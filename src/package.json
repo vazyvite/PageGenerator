@@ -1,0 +1,21 @@
+{
+	"name": "PSL-PG",
+	"version": "0.0.1",
+	"description": "Page Generator pour les démarches PSL",
+	"author": "Jonathan JACQUES <jonathan.jacques@capgemini.com>",
+	"main": "index.html",
+	"window": {
+		"fullscreen": false,
+		"toolbar": true,
+		"icon": "./css/favicon.ico",
+		"title": "PSL Page Generator",
+		"width": 1450,
+		"height": 900,
+		"position": "center",
+		"as_desktop": true
+	},
+	"license": "Copyright Jonathan Jacques",
+	"dependencies": {
+		"pg": "^4.5.1"
+	}
+}

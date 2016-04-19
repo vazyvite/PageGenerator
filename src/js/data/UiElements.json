@@ -1,0 +1,72 @@
+{
+	"listeUIElements": [{
+		"name": "INPUT",
+		"shortDesc": "Champ de saisie textuel",
+		"type": "form",
+		"options": {
+			"type": {
+				"label": "Le type de champ",
+				"type": "text",
+				"default": "text",
+				"pattern": null,
+				"list": ["text", "hidden", "password", "email", "tel", "url", "number", "date", "datetime", "datetime-local", "month", "time", "week"],
+				"required": false,
+				"help": null
+			},
+			"maxlength": {
+				"label": "Limite de caractères",
+				"type": "number",
+				"default": "",
+				"pattern": "[0-9]",
+				"list": [],
+				"required": false,
+				"help": "Indique la limite de caractères qu'il est possible de rentrer dans le champ."
+			}
+		}
+	},{
+		"name": "CHECK",
+		"shortDesc": "Case à cocher",
+		"type": "form",
+		"options": {}
+	},{
+		"name": "RADIO",
+		"shortDesc": "Choix multiple",
+		"type": "form",
+		"options": {}
+	},{
+		"name": "SELECT",
+		"shortDesc": "Liste déroulante",
+		"type": "form",
+		"options": {}
+	},{
+		"name": "TEXTAREA",
+		"shortDesc": "Champs de saisie libre",
+		"type": "form",
+		"options": {
+			"maxlength": {
+				"label": "Limite de caractères",
+				"type": "number",
+				"default": "",
+				"pattern": "[0-9]",
+				"list": [],
+				"required": false,
+				"help": "Indique la limite de caractères qu'il est possible de rentrer dans le champ."
+			}
+		}
+	},{
+		"name": "TEXTE",
+		"shortDesc": "Texte statique",
+		"type": "form",
+		"options": {}
+	},{
+		"name": "TITRE",
+		"shortDesc": "Titre",
+		"type": "form",
+		"options": {}
+	},{
+		"name": "TABLEAU",
+		"shortDesc": "Un tableau de données",
+		"type": "form",
+		"options": {}
+	}]
+}
