@@ -100,9 +100,79 @@
 		return options;
 	}
 
+	function createModaleForUiElement(uiElement, initialUiElement, callback) {
+		var option = null,
+			uiData = (initialUiElement != null) ? initialUiElement.data("uielement") : uiElement.data("uielement"),
+			options = (initialUiElement != null && initialUiElement.data("uielement") != null) ? initialUiElement.data("uielement").options : uiElement.data("datagen"),
+			optionsDefault = getOptionsParType(uiData.type),
+			optionsFinal = optionsDefault,
+			$content = $("<div>"),
+			$contentLeft = $("<div>").addClass("col-md-5 col-md-offset-1"),
+			$contentRight = $("<div>").addClass("col-md-5"),
+			generatedFormGroup = null,
+			titreModal = (initialUiElement != null) ? "Ajouter un élément" : "Modifier un élément";
+		if (options != null) {
+			// on créé la liste finale des options à partir de la liste des options de type et la liste des options spécifiques
+			for (option in options) {
+				if (options.hasOwnProperty(option)) {
+					optionsFinal[option] = options[option];
+				}
+			}
+			// on génère chaque élément de formulaire sur la base de la liste finale des options
+			option = null;
+			for (option in optionsFinal) {
+				if (optionsFinal.hasOwnProperty(option)) {
+					generatedFormGroup = app.core.modal.generateFormGroup(option, optionsFinal[option], optionsFinal[option].val);
+					if (optionsFinal[option].type == "boolean") {
+						generatedFormGroup.appendTo($contentRight);
+					} else {
+						generatedFormGroup.appendTo($contentLeft);
+					}
+				}
+			}
+			$contentLeft.appendTo($content);
+			$contentRight.appendTo($content);
+			app.core.modal.drawModal("addUiElement", titreModal, $content, function () {
+				var validationModal = app.core.validation.valideForm($("#addUiElement"));
+				if (validationModal) {
+					if (initialUiElement != null) {
+						uiElement.prepend($("<span>").text(initialUiElement[0].innerText.trim() + "#" + $("#modal_codeChamp").val()));
+					}
+					$("#addUiElement .app-modal-content :input").each(function () {
+						var $this = $(this),
+							keyOption = $this.attr("data-optionName");
+						if (optionsFinal.hasOwnProperty(keyOption)) {
+							if ($this.is(":checkbox") || $this.is(":radio")) {
+								optionsFinal[keyOption].val = $this.is(":checked");
+							} else {
+								optionsFinal[keyOption].val = $this.val();
+							}
+						}
+					});
+					uiElement.data("uielement", uiData);
+					uiElement.data("datagen", optionsFinal);
+					if ($.isFunction(callback)) {
+						callback();
+					}
+					$(".page-line:empty").remove();
+					return true;
+				} else {
+					return false;
+				}
+			}, function () {
+				if ($.isFunction(callback)) {
+					callback();
+				}
+				$(".page-line:empty").remove();
+				return true;
+			});
+		}
+	}
+
 	function dropUiElement(uiElement, initialUiElement, callback) {
 		// affichage des options relatives à l'élément
-		var uiElementData = $(initialUiElement).data("uielement"),
+		createModaleForUiElement($(uiElement), $(initialUiElement), callback);
+		/*var uiElementData = $(initialUiElement).data("uielement"),
 			$uiElement = $(uiElement);
 		if (uiElement != null) {
 			var $content = $("<div>"),
@@ -157,6 +227,7 @@
 						}
 					});
 
+					$uiElement.data("uielement", uiElementData);
 					$uiElement.data("datagen", optionsFinal);
 
 					if ($.isFunction(callback)) {
@@ -174,7 +245,7 @@
 				$(".page-line:empty").remove();
 				return true;
 			});
-		}
+		}*/
 	}
 
 	function convertPageLine($tag) {
@@ -264,6 +335,8 @@
 
 				$("body").on("click", ".btn-delete", function () {
 					$(this).parents(".page-line").remove();
+				}).on("click", ".btn-edit", function () {
+					createModaleForUiElement($(this).parents(".page-line:first"), null, null);
 				});
 			}
 		}

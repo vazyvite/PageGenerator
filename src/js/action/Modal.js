@@ -18,6 +18,7 @@
 	 * @param {object}   $content       le contenu de la modale
 	 * @param {function} callbackDone   la callback de la modale en cas de clic sur le bouton OK
 	 * @param {function} callbackCancel la callback de la modale en cas de clic sur le bouton Annuler
+	 *
 	 */
 	function drawModal(id, title, $content, callbackDone, callbackCancel) {
 		var $cache = $("<div>").addClass("app-modal").attr("id", id),
@@ -86,7 +87,7 @@
 	 * @param   {object} option l'option à générer sous forme de formulaire
 	 * @returns {object} le form group
 	 */
-	function generateFormGroup(key, option) {
+	function generateFormGroup(key, option, valeurDefault) {
 		var $row = $("<div>").addClass("row"),
 			$formGroup = $("<div>").addClass("form-group"),
 			$divControl = $("<div>").addClass("col-md-7"),
@@ -112,7 +113,7 @@
 			for (i; i < option.list.length; i++) {
 				$("<option>").attr({
 					"value": option.list[i],
-					"selected": (option.list[i] == option.default)
+					"selected": (option.list[i] == option.default || option.list[i] == valeurDefault)
 				}).text(option.list[i]).appendTo($select);
 			}
 		} else if (option.type == "boolean") {
@@ -121,7 +122,8 @@
 				"name": "modal_" + key,
 				"type": "checkbox",
 				"required": option.required,
-				"data-optionName": key
+				"data-optionName": key,
+				"checked": valeurDefault
 			}).prependTo($label);
 			$formGroup.addClass("checkbox");
 			$row.removeClass("row");
@@ -133,7 +135,7 @@
 				"pattern": option.pattern,
 				"value": option.default,
 				"data-optionName": key
-			}).addClass("form-control").appendTo($divControl);
+			}).val(valeurDefault).addClass("form-control").appendTo($divControl);
 		}
 		$formGroup.appendTo($row);
 		return $row;
