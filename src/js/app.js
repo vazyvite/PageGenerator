@@ -100,6 +100,10 @@
 		return options;
 	}
 
+	function supprimerPageLineVides() {
+		$(".page-line .uiElement-content:empty").parents(".page-line:first").remove();
+	}
+
 	function createModaleForUiElement(uiElement, initialUiElement, callback) {
 		var option = null,
 			uiData = (initialUiElement != null) ? initialUiElement.data("uielement") : uiElement.data("uielement"),
@@ -136,7 +140,8 @@
 				var validationModal = app.core.validation.valideForm($("#addUiElement"));
 				if (validationModal) {
 					if (initialUiElement != null) {
-						uiElement.prepend($("<span>").text(initialUiElement[0].innerText.trim() + "#" + $("#modal_codeChamp").val()));
+						uiElement.find(".uiElement-content").text(initialUiElement[0].innerText.trim() + "#" + $("#modal_codeChamp").val())
+//						uiElement.prepend($("<span>").text(initialUiElement[0].innerText.trim() + "#" + $("#modal_codeChamp").val()));
 					}
 					$("#addUiElement .app-modal-content :input").each(function () {
 						var $this = $(this),
@@ -154,7 +159,7 @@
 					if ($.isFunction(callback)) {
 						callback();
 					}
-					$(".page-line:empty").remove();
+					supprimerPageLineVides();
 					return true;
 				} else {
 					return false;
@@ -163,7 +168,7 @@
 				if ($.isFunction(callback)) {
 					callback();
 				}
-				$(".page-line:empty").remove();
+				supprimerPageLineVides();
 				return true;
 			});
 		}
@@ -254,6 +259,7 @@
 			$tag.attr({
 				"tabindex": 1
 			});
+			$("<span>").addClass("uiElement-content").appendTo($tag);
 			$("<button>").addClass("btn btn-default glyphicon glyphicon-remove btn-delete pull-right").attr({
 				"type": "button",
 				"title": "Supprimer"
