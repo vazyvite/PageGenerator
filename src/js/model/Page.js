@@ -1,3 +1,5 @@
+/*jslint eqeq: true, plusplus: true*/
+/*globals $, app*/
 function Page() {
 	"use strict";
 	var that = this;
@@ -25,18 +27,41 @@ function Page() {
 	 */
 	that.drawModal = function () {
 		// création du contenu de la modale
-		var $formModal = $("<div>").addClass("col-md-10 col-md-offset-1");
-		$formModal.append(app.core.modal.generateModalFormGroup("IdPage", "msp_idPage", true, "Identifiant permettant d'identifier la page dans le code Javascript.", localStorage.getItem("idPage")));
-		$formModal.append(app.core.modal.generateModalFormGroup("Model", "msp_model", true, "Nom du model auquel est rattaché la page tel qu'il apparait dans le demarche-flow.xml.", localStorage.getItem("model")));
-		$formModal.append(app.core.modal.generateModalFormGroup("Code démarche (préfix messages properties de la démarche)", "msp_prefixDemarche", true, "Le préfix de la demarche permettant de construire les messages properties de la démarche.", localStorage.getItem("prefixDemarche")));
-		$formModal.append(app.core.modal.generateModalFormGroup("Préfix page (préfix messages properties de la page)", "msp_prefixPage", true, "Le préfix de la page permettant de construire les messages properties de la page.", localStorage.getItem("prefixPage")));
+		var formModal = {
+			className: "col-md-10 col-md-offset-1",
+			listFormGroups: [{
+				label: "IdPage",
+				id: "msp_idPage",
+				requis: true,
+				infobulle: "Identifiant permettant d'identifier la page dans le code Javascript.",
+				valeurDefault: localStorage.getItem("idPage")
+			}, {
+				label: "Model",
+				id: "msp_model",
+				requis: true,
+				infobulle: "Nom du model auquel est rattaché la page tel qu'il apparait dans le demarche-flow.xml.",
+				valeurDefault: localStorage.getItem("model")
+			}, {
+				label: "Code démarche (préfix messages properties de la démarche)",
+				id: "msp_prefixDemarche",
+				requis: true,
+				infobulle: "Le préfix de la demarche permettant de construire les messages properties de la démarche.",
+				valeurDefault: localStorage.getItem("prefixDemarche")
+			}, {
+				label: "Préfix page (préfix messages properties de la page)",
+				id: "msp_prefixPage",
+				requis: true,
+				infobulle: "Le préfix de la page permettant de construire les messages properties de la page.",
+				valeurDefault: localStorage.getItem("prefixPage")
+			}]
+		};
 
 		// création de la modale
-		app.core.modal.drawModal("modalSettingsPage", "Informations sur la Page", $formModal, function (event, $modal) {
-			var validationModal = app.core.validation.valideForm($formModal);
+		app.core.modal.drawModal("modalSettingsPage", "Informations sur la Page", formModal, false, function (event, $modal) {
+			var validationModal = app.core.validation.valideForm($modal);
 			if (validationModal) {
 				// initialisation de la page Atelier
-				app.atelier.init();
+				app.api.atelier.init();
 				// sauvegarde des informations de la page dans le localStorage et dans le model Page
 				that.setValue("idPage", $modal.find("#msp_idPage").val());
 				that.setValue("model", $modal.find("#msp_model").val());

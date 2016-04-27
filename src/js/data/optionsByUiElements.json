@@ -1,0 +1,49 @@
+{
+	"map": {
+		"required": {
+			"label": "Champs requis",
+			"type": "boolean",
+			"default": false,
+			"pattern": null,
+			"list": [],
+			"required": false,
+			"help": null
+		},
+		"disabled": {
+			"label": "Champs désactivé",
+			"type": "boolean",
+			"default": false,
+			"pattern": null,
+			"list": [],
+			"required": false,
+			"help": null
+		},
+		"hasInfobulle": {
+			"label": "Champs associé à une infobulle",
+			"type": "boolean",
+			"default": false,
+			"pattern": null,
+			"list": [],
+			"required": false,
+			"help": null
+		},
+		"codeChamp": {
+			"label": "Clé de properties",
+			"type": "text",
+			"default": "",
+			"pattern": null,
+			"list": [],
+			"required": true,
+			"help": "Indique le préfix utilisé pour les messages properties du champ. Ce code doit être unique car il permettra de générer les identifiants."
+		},
+		"attributJava": {
+			"label": "Attribut Java",
+			"type": "text",
+			"default": "",
+			"pattern": null,
+			"list": [],
+			"required": true,
+			"help": "Indique le nom de l'attribut Java lié au champ de saisie."
+		}
+	}
+}
