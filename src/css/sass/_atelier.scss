@@ -1,10 +1,12 @@
 #tabAtelier {
 	.menu {
 		position: absolute;
+		top: 7px;
 		width: 150px;
 		background-color: $color_gris3;
 		height: 100%;
 		padding: 15px;
+		overflow-y: auto;
 
 		.item {
 			color: $color_blanc;
