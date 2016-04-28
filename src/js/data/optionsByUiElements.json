@@ -44,6 +44,24 @@
 			"list": [],
 			"required": true,
 			"help": "Indique le nom de l'attribut Java lié au champ de saisie."
+		},
+		"format": {
+			"label": "Formats de saisie",
+			"type": "text",
+			"default": "",
+			"pattern": null,
+			"list": [],
+			"required": false,
+			"help": "Les codes des controles de surface qui valoriseront le data-format du champ de saisie."
+		},
+		"attributJavaText": {
+			"label": "Attribut Java",
+			"type": "text",
+			"default": "",
+			"pattern": null,
+			"list": [],
+			"required": false,
+			"help": "Indique le nom de l'attribut Java lié au champ texte."
 		}
 	}
 }

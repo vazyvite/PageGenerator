@@ -4,7 +4,7 @@ function Option() {
 
 	that.label = "";
 	that.type = "";
-	that.default = "";
+	that["default"] = "";
 	that.pattern = "";
 	that.list = [];
 	that.required = "";

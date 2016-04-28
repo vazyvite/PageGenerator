@@ -1,4 +1,6 @@
-(function () {
+/*jslint eqeq: true, plusplus: true*/
+/*globals jQuery, app*/
+(function ($) {
 	"use strict";
 
 	/**
@@ -65,4 +67,4 @@
 		 */
 		valideForm: validationContext
 	};
-}());
+}(jQuery));

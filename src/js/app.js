@@ -12,6 +12,7 @@
 			 */
 			appLaunch: function () {
 				app.core.validation.init();
+				app.api.generate.init();
 				app.page.drawModal();
 			}
 		},

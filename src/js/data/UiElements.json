@@ -27,12 +27,32 @@
 		"name": "CHECK",
 		"shortDesc": "Case à cocher",
 		"type": "form",
-		"options": {}
+		"options": {
+			"number": {
+				"label": "Nombre de réponses",
+				"type": "number",
+				"default": 2,
+				"pattern": null,
+				"list": [],
+				"required": false,
+				"help": "Indique le nombre d'options à générer."
+			}
+		}
 	},{
 		"name": "RADIO",
 		"shortDesc": "Choix multiple",
 		"type": "form",
-		"options": {}
+		"options": {
+			"number": {
+				"label": "Nombre de réponses",
+				"type": "number",
+				"default": 2,
+				"pattern": null,
+				"list": [],
+				"required": false,
+				"help": "Indique le nombre d'options à générer."
+			}
+		}
 	},{
 		"name": "SELECT",
 		"shortDesc": "Liste déroulante",
@@ -50,7 +70,7 @@
 				"pattern": "[0-9]",
 				"list": [],
 				"required": false,
-				"help": "Indique la limite de caractères qu'il est possible de rentrer dans le champ."
+				"help": "Indique la limite de caractères qu'il est possible de rentrer dans le champ (si renseigné, devient un billet)."
 			}
 		}
 	},{
@@ -61,12 +81,27 @@
 	},{
 		"name": "TITRE",
 		"shortDesc": "Titre",
-		"type": "form",
+		"type": "text",
+		"options": {
+			"niveau": {
+				"label": "Niveau du titre",
+				"type": "number",
+				"default": 2,
+				"pattern": "[1-6]",
+				"list": [],
+				"required": true,
+				"help": null
+			}
+		}
+	},{
+		"name": "PARAGRAPH",
+		"shortDesc": "Paragraphe",
+		"type": "text",
 		"options": {}
 	},{
 		"name": "TABLEAU",
 		"shortDesc": "Un tableau de données",
-		"type": "form",
+		"type": "text",
 		"options": {}
 	}]
 }

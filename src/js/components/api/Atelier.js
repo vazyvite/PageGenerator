@@ -18,7 +18,8 @@
 	 */
 	function getOptionsParType(typeElement) {
 		var mapTypeOption = {
-				"form": ["required", "disabled", "hasInfobulle", "codeChamp", "attributJava"]
+				"form": ["required", "disabled", "hasInfobulle", "codeChamp", "format", "attributJava"],
+				"text": ["codeChamp", "attributJavaText"]
 			},
 			options = {},
 			i = 0;
@@ -110,11 +111,18 @@
 		$("." + PAGE_LINE_CLASSNAME + " .uiElement-content:empty").parents("." + PAGE_LINE_CLASSNAME + ":first").remove();
 	}
 
+	/**
+	 * Effectue un appel de création de modale pour une création / modification d'uiElement
+	 * @author JJACQUES
+	 * @param   {object} uiElement        l'uiElement à modifier / créer
+	 * @param   {object} initialUiElement l'uiElement initial (lors de la création)
+	 * @callback callback
+	 */
 	function createModaleForUiElement(uiElement, initialUiElement, callback) {
 		var option = null,
 			uiData = (initialUiElement != null) ? initialUiElement.data("uielement") : uiElement.data("uielement"),
 			options = (initialUiElement != null && initialUiElement.data("uielement") != null) ? initialUiElement.data("uielement").options : uiElement.data("datagen"),
-			optionsDefault = getOptionsParType(uiData.type),
+			optionsDefault = jQuery.extend(true, {}, getOptionsParType(uiData.type)),
 			optionsFinal = optionsDefault,
 			content = null,
 			titreModal = (initialUiElement != null) ? "Ajouter un élément" : "Modifier un élément";
@@ -178,6 +186,13 @@
 		}
 	}
 
+	/**
+	 * Evènement joué lors du dépot d'un uiElement sur la page
+	 * @author JJACQUES
+	 * @param {object} uiElement        l'uiElement créé
+	 * @param {object} initialUiElement l'uiElement source
+	 * @callback callback
+	 */
 	function dropUiElement(uiElement, initialUiElement, callback) {
 		// affichage des options relatives à l'élément
 		createModaleForUiElement($(uiElement), $(initialUiElement), callback);
@@ -251,6 +266,15 @@
 					createModaleForUiElement($(this).parents("." + PAGE_LINE_CLASSNAME + ":first"), null, null);
 				});
 			}
+		},
+
+		/**
+		 * Retourne le contenu de l'atelier.
+		 * @author JJACQUES
+		 * @returns {object} le contenu de l'atelier sous forme d'objet jQuery
+		 */
+		getContenuAtelier: function () {
+			return $("." + ATELIER_PAGE_CLASSNAME).find("." + PAGE_LINE_CLASSNAME);
 		}
 	};
 }(jQuery));
