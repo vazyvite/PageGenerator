@@ -122,13 +122,8 @@
 			}
 		}
 	},{
-		"name": "PARAGRAPH",
+		"name": "PARA-GRAPH",
 		"shortDesc": "Paragraphe",
-		"type": "text",
-		"options": {}
-	},{
-		"name": "TABLEAU",
-		"shortDesc": "Un tableau de données",
 		"type": "text",
 		"options": {}
 	}]
