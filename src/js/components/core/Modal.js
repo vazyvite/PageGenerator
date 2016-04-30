@@ -182,6 +182,11 @@
 				$cache.remove();
 			}
 		});
+		$("#" + id).on("keypress", function (event) {
+			if (event.keyCode == 13) {
+				$("#" + id + " .app-modal-footer .btn-primary").trigger("click");
+			}
+		});
 	}
 
 	app.core.modal = {
