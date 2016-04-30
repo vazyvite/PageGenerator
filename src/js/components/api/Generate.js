@@ -9,6 +9,38 @@
 		listeProperties = [];
 
 	/**
+	 * Génère un saut de ligne.
+	 * @author JJACQUES
+	 * @param   {object} $container le container dans lequel sera inséré le saut de ligne
+	 * @returns {object} le saut de ligne
+	 */
+	function breakLine($container) {
+		return $("<!--{{n}}-->").appendTo($container);
+	}
+
+	/**
+	 * Retourne un commentaire précédé d'un saut de ligne.
+	 * @author JJACQUES
+	 * @param   {string} texte le texte du commentaire
+	 * @param   {object} $container le container dans lequel sera inséré le commentaire
+	 * @returns {object} le commentaire
+	 */
+	function commentaire(texte, $container) {
+		breakLine($container);
+		$("<!-- " + texte + " --><!--{{n}}-->").appendTo($container);
+	}
+
+	/**
+	 * Retourne un commentaire HTML.
+	 * @author JJACQUES
+	 * @param   {string} texte le texte du TODO
+	 * @returns {string} le commentaire TODO
+	 */
+	function todo(texte) {
+		return $("<!-- TODO " + app.page.trigramme + " : " + texte + " --><!--{{n}}-->");
+	}
+
+	/**
 	 * Détermine l'identifiant d'un élément et le stock dans listeID.
 	 * @author JJACQUES
 	 * @param   {string} prefix  le préfix de l'identifiant
@@ -16,7 +48,8 @@
 	 * @returns {string} l'identifiant généré
 	 */
 	function determinerIdElement(prefix, options) {
-		var id = prefix + "_" + options.attributJava.val;
+		var idBase = (options != null && options.attributJava != null) ? options.attributJava.val : new Date().getTime(),
+			id = prefix + "_" + idBase;
 		listeID.push(id);
 		return id;
 	}
@@ -115,7 +148,7 @@
 
 		// génération du texte
 		$("<span>").attr({
-			"th:text": generateCleProperties(options, "help-content")
+			"th:text": "#{" + generateCleProperties(options, "help-content") + "}"
 		}).appendTo($infobulle);
 
 		return $infobulle;
@@ -141,30 +174,49 @@
 	 * @param   {object}   options les options de l'élément
 	 * @returns {object} le label
 	 */
-	function genererLabel(idInput, options) {
-		var $label = $("<label>").addClass("control-label").attr({
-			"for": idInput,
-			"id": determinerIdElement("lbl", options)
-		});
+	function genererLabel(idInput, idLabel, element, options) {
+		var $label = null;
 
+		if (element.name == "CHECK" || element.name == "RADIO") {
+			$label = $("<div>").addClass("control-label col-md-12").attr({
+				"id": idLabel
+			});
+		} else {
+			$label = $("<label>").addClass("control-label").attr({
+				"for": idInput,
+				"id": idLabel
+			});
+		}
+
+		breakLine($label);
 		// on vérifie si le champ est obligatoire
 		if (options.required && options.required.val) {
+			commentaire("L'indicateur de champ obligatoire.", $label);
 			generateRequiredTag().appendTo($label);
+			breakLine($label);
 		}
 
 		// on positionne le libellé
+		commentaire("Le texte du label.", $label);
 		generateTexteLabel(options).appendTo($label);
+		breakLine($label);
 
 		// on vérifie si le champ a une infobulle
 		if (options.hasInfobulle && options.hasInfobulle.val) {
 			var idBtnInfobulle = determinerIdElement("btnHelp", options),
 				idContentInfobulle = determinerIdElement("help", options);
+			commentaire("Le bouton de l'infobulle", $label);
 			generateBtnInfobulle(options, idBtnInfobulle, idContentInfobulle).appendTo($label);
+			breakLine($label);
+			commentaire("Le contenu de l'infobulle", $label);
 			generateContentInfobulle(options, idBtnInfobulle, idContentInfobulle).appendTo($label);
+			breakLine($label);
 		}
 
 		// on génère la balise des messages d'erreur
+		commentaire("La balise des messages d'erreurs", $label);
 		genererErrorTag(options).appendTo($label);
+		breakLine($label);
 
 		return $label;
 	}
@@ -176,6 +228,62 @@
 	 */
 	function genererInputContainer() {
 		return $("<div>").addClass("col-md-6");
+	}
+
+	/**
+	 * Génère un radio container permettant d'y insérer des radios boutons ou des checkbox
+	 * @author JJACQUES
+	 * @param   {string} type indique le type de container à créer (RADIO | CHECK)
+	 * @returns {object} le container
+	 */
+	function genererRadioContainer(type) {
+		var stringType = "";
+		if (type == "RADIO") {
+			stringType = "radio";
+		} else if (type == "CHECK") {
+			stringType = "checkbox";
+		}
+		return $("<div>").addClass(stringType).attr({
+			"role": "presentation"
+		});
+	}
+
+	/**
+	 * Rend un champ requis.
+	 * @author JJACQUES
+	 * @param {object} $field le champ de saisie
+	 */
+	function makeFieldRequired($field) {
+		$field.attr("required", "required");
+	}
+
+	/**
+	 * Rend un champ désactivé.
+	 * @author JJACQUES
+	 * @param {object} $field le champ de saisie
+	 */
+	function makeFieldDisabled($field) {
+		$field.attr("disabled", "disabled");
+	}
+
+	/**
+	 * Rend un champ avec une limite de saisie
+	 * @author JJACQUES
+	 * @param {object} $field le champ de saisie
+	 * @param {number} max    la limite de caractères autorisée
+	 */
+	function makeFieldMaxLength($field, max) {
+		$field.attr("maxlength", max);
+	}
+
+	/**
+	 * Rend un champ avec un format de saisie.
+	 * @author JJACQUES
+	 * @param {object} $field le champ de saisie
+	 * @param {string} format le format de saisie
+	 */
+	function makeFieldFormated($field, format) {
+		$field.attr("data-format", format);
 	}
 
 	/**
@@ -195,56 +303,239 @@
 
 		// on détermine la longueur maximale du champ de saisie
 		if (options.maxlength && options.maxlength.val) {
-			$input.attr("maxlength", options.maxlength.val);
+			makeFieldMaxLength($input, options.maxlength.val);
 		}
 
 		// on détermine si le champ est requis
 		if (options.required && options.required.val) {
-			$input.attr("required", "required");
+			makeFieldRequired($input);
+		}
+
+		// on détermine si le champ est désactivé
+		if (options.disabled && options.disabled.val) {
+			makeFieldDisabled($input);
+		}
+
+		// on détermine le format du champ
+		if (options.format && options.format.val != "") {
+			makeFieldFormated($input, options.format.val);
 		}
 
 		return $input;
 	}
 
-	function genererSelect(options) {
+	/**
+	 * Génère un select.
+	 * @author JJACQUES
+	 * @param   {string} idInput l'id du champ de saisie
+	 * @param   {object}   options les options de l'élément
+	 * @returns {object} le select
+	 */
+	function genererSelect(idInput, options) {
+		var $select = $("<select>").addClass("form-control").attr({
+			"aria-invalid": "false",
+			"id": idInput,
+			"th:field": "${" + options.attributJava.val + "}"
+		});
 
+		if (options.listeOptions && options.listeOptions.val) {
+			$("<option>").attr({
+				"th:each": "val : ${" + options.listeOptions.val + "}",
+				"th:value": "${val.key}",
+				"th:text": "${val.value}"
+			}).appendTo($select);
+		}
+
+		// on détermine si le champ est requis
+		if (options.required && options.required.val) {
+			makeFieldRequired($select);
+		}
+
+		// on détermine si le champ est désactivé
+		if (options.disabled && options.disabled.val) {
+			makeFieldDisabled($select);
+		}
+
+		return $select;
 	}
 
-	function genererChampTexte(options) {
+	/**
+	 * Génère un champ texte static mappé sur un attribut Java.
+	 * @author JJACQUES
+	 * @param   {string} idInput l'id de l'input
+	 * @param   {object}   options les options de l'élément
+	 * @returns {object} le champ static
+	 */
+	function genererChampTexte(idInput, options) {
+		var $staticField = $("<p>").addClass("form-control-static").attr({
+			"id": idInput
+		});
 
+		if (options != null && options.attributJavaText != null && options.attributJavaText.val != "") {
+			$staticField.attr("th:text", "${" + options.attributJavaText.val + "}");
+		}
+		return $staticField;
 	}
 
-	function genererInput(idInput, element, options) {
-		var $inputContainer = null;
+	/**
+	 * Génère une checkbox
+	 * @author JJACQUES
+	 * @param   {string} idValue l'id de la checkbox
+	 * @param   {string} idLabel l'id du label
+	 * @param   {object}   options les options de l'élément
+	 * @param   {number} index   l'index du champ dans la liste des checkbox
+	 * @returns {object} la checkbox
+	 */
+	function genererCheckbox(idValue, idLabel, options, index) {
+		var $label = $("<label>").attr({
+			"for": idValue
+		}),
+			$input = null;
+		breakLine($label);
+		$input = $("<input>").addClass("").attr({
+			"type": "checkbox",
+			"th:field": "${" + options.attributJava.val + "}",
+			"value": "valeur" + index,
+			"aria-describedby": idLabel,
+			"aria-invalid": "false",
+			"id": idValue
+		}).appendTo($label);
+		breakLine($label);
+		$("<span>").attr({
+			"th:text": "#{" + generateCleProperties(options, "valeur" + index) + "}"
+		}).appendTo($label);
+		breakLine($label);
 
-		if (element.name == "INPUT" || element.name == "SELECT" || element.name == "TEXTE") {
+		// On vérifie si le champ est obligatoire
+		if (options.required != null && options.required.val) {
+			makeFieldRequired($input);
+		}
+
+		// On vérifie si le champ est désactivé
+		if (options.disabled != null && options.disabled.val) {
+			makeFieldDisabled($input);
+		}
+
+		return $label;
+	}
+
+	/**
+	 * Génère un champ radio bouton
+	 * @author JJACQUES
+	 * @param   {string} idValue l'id du champ de saisie
+	 * @param   {string} idLabel l'id du label
+	 * @param   {object}   options les options de l'élément
+	 * @param   {number} index   l'index du radio bouton dans la liste des radios boutons
+	 * @returns {object} le radio bouton
+	 */
+	function genererRadio(idValue, idLabel, options, index) {
+		var $label = $("<label>").attr({
+			"for": idValue
+		}),
+			$input = null;
+		breakLine($label);
+		$input = $("<input>").addClass("").attr({
+			"type": "radio",
+			"th:field": "${" + options.attributJava.val + "}",
+			"value": "valeur" + index,
+			"aria-describedby": idLabel,
+			"aria-invalid": "false",
+			"id": idValue
+		}).appendTo($label);
+		breakLine($label);
+		$("<span>").attr({
+			"th:text": "#{" + generateCleProperties(options, "valeur" + index) + "}"
+		}).appendTo($label);
+		breakLine($label);
+
+		// On vérifie si le champ est obligatoire
+		if (options.required != null && options.required.val) {
+			makeFieldRequired($input);
+		}
+
+		// On vérifie si le champ est désactivé
+		if (options.disabled != null && options.disabled.val) {
+			makeFieldDisabled($input);
+		}
+
+		return $label;
+	}
+
+	/**
+	 * Génère un champ de saisie.
+	 * @author JJACQUES
+	 * @param   {string} idInput l'id de l'input
+	 * @param   {object}   element l'élément
+	 * @param   {object} options les options de l'élément
+	 * @returns {object} l'élément
+	 */
+	function genererInput(idInput, idLabel, element, options) {
+		var $inputContainer = null,
+			$inputPres = null,
+			i = 0;
+
+		if (element.name == "INPUT" || element.name == "SELECT" || element.name == "TEXTE-STATIC") {
 			$inputContainer = genererInputContainer();
+			breakLine($inputContainer);
 			if (element.name == "INPUT") {
-				genererChampInput(idInput, options);
+				genererChampInput(idInput, options).appendTo($inputContainer);
+				breakLine($inputContainer);
 			} else if (element.name == "SELECT") {
-				genererSelect(idInput, options);
-			} else if (element.name == "TEXTE") {
-				genererChampTexte(idInput, options);
+				todo("vérifier le mapping sur la liste des éléments de la liste.").appendTo($inputContainer);
+				genererSelect(idInput, options).appendTo($inputContainer);
+				breakLine($inputContainer);
+			} else if (element.name == "TEXTE-STATIC") {
+				genererChampTexte(idInput, options).appendTo($inputContainer);
+				breakLine($inputContainer);
 			}
 			return $inputContainer;
-		} else if (element.name == "CHECK") {
-
-		} else if (element.name == "RADIO") {
-
+		} else if (element.name == "RADIO" || element.name == "CHECK") {
+			$inputContainer = $("<div>");
+			breakLine($inputContainer);
+			if (options.number != null && options.number.val > 0) {
+				for (i; i < options.number.val; i++) {
+					$inputPres = genererRadioContainer();
+					$inputPres.appendTo($inputContainer);
+					breakLine($inputPres);
+					if (element.name == "RADIO") {
+						commentaire("Réponse " + i, $inputPres);
+						genererRadio(determinerIdElement("val" + i, options), idLabel, options, i).appendTo($inputPres);
+						breakLine($inputPres);
+					} else if (element.name == "CHECK") {
+						commentaire("Réponse " + i, $inputPres);
+						genererCheckbox(determinerIdElement("val" + i, options), idLabel, options, i).appendTo($inputPres);
+						breakLine($inputPres);
+					}
+				}
+			}
+			breakLine($inputContainer);
+			return $inputContainer;
 		} else if (element.name == "TEXTAREA") {
-
+			throw "Non développé.";
 		}
 	}
 
+	/**
+	 * Initialise et génère un form-group.
+	 * @author JJACQUES
+	 * @param   {object} element les informations sur l'élément à générer
+	 * @param   {object} options les options de l'élément
+	 * @returns {object} le form-group
+	 */
 	function initialiserFormElement(element, options) {
-		var $element = $("<div>").addClass("form-group"),
+		var $element = $("<div>").addClass("form-group row"),
 			idInput = determinerIdElement("input", options),
-			$label = genererLabel(idInput, options),
-			$input = genererInput(idInput, element, options);
+			idLabel = determinerIdElement("lbl", options),
+			$label = genererLabel(idInput, idLabel, element, options),
+			$input = genererInput(idInput, idLabel, element, options);
 
+		breakLine($element);
+		commentaire("le Label", $element);
 		$label.appendTo($element);
+		breakLine($element);
+		commentaire("le champ de saisie", $element);
 		$input.appendTo($element);
-
+		breakLine($element);
 
 		return $element;
 	}
@@ -264,7 +555,10 @@
 	 * @param {object} $atelier les objets issus de l'atelier
 	 */
 	function generateFromAtelier($atelier) {
-		var $htmlGenere = $("<div>");
+		var $htmlGenere = $("<div>"),
+			htmlString = "",
+			regExp = new RegExp(/<!\-\-\{\{n\}\}\-\->/gi);
+		breakLine($htmlGenere);
 		if ($atelier != null) {
 			initialiserGeneration();
 			$atelier.each(function () {
@@ -275,7 +569,7 @@
 					$element = null;
 
 				if ($uiElement != null && options != null && typeElement != null) {
-					if (typeElement.type == "form") {
+					if (typeElement.type == "form" || typeElement.type == "textform") {
 						// si l'élément est de type form
 						for (option in options) {
 							if (options.hasOwnProperty(option)) {
@@ -284,14 +578,16 @@
 						}
 					} else if (typeElement.type == "text") {
 						// si l'élément est de type texte
-						alert("TODO");
+						throw "non développé.";
 					}
 					$htmlGenere.append($element);
+					breakLine($htmlGenere);
 				}
 			});
 		}
 
-		$(".html-page").text($htmlGenere[0].outerHTML);
+		htmlString = $htmlGenere[0].outerHTML.replace(regExp, "\n");
+		return htmlString;
 	}
 
 	/**
@@ -305,7 +601,7 @@
 			$atelier = app.api.atelier.getContenuAtelier();
 
 		if ($atelier != null) {
-			generateFromAtelier($atelier);
+			$atelier = generateFromAtelier($atelier);
 		}
 
 		return template.replace(regExp, $atelier);
@@ -318,21 +614,25 @@
 	 * @returns {string} le template initialisé
 	 */
 	function initialiserTemplate(templateData) {
-		var pageModel = app.page,
-			attribut = null,
-			regExp = null,
-			template = templateData,
-			$template = null;
-		if (pageModel != null) {
-			for (attribut in pageModel) {
-				if (pageModel.hasOwnProperty(attribut)) {
-					regExp = new RegExp("{{" + attribut + "}}", "gi");
-					template = template.replace(regExp, pageModel[attribut]);
+		try {
+			var pageModel = app.page,
+				attribut = null,
+				regExp = null,
+				template = templateData,
+				$template = null;
+			if (pageModel != null) {
+				for (attribut in pageModel) {
+					if (pageModel.hasOwnProperty(attribut)) {
+						regExp = new RegExp("{{" + attribut + "}}", "gi");
+						template = template.replace(regExp, pageModel[attribut]);
+					}
 				}
 			}
+			template = replaceContent(template);
+			return template;
+		} catch (e) {
+			console.error(e);
 		}
-		template = replaceContent(template);
-		return template;
 	}
 
 	app.api.generate = {
@@ -345,6 +645,7 @@
 					}
 					if (dataHtml != null) {
 						template = initialiserTemplate(dataHtml);
+						$(".html-page pre").text(template);
 					}
 				});
 			});
