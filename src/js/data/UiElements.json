@@ -21,6 +21,15 @@
 				"list": [],
 				"required": false,
 				"help": "Indique la limite de caractères qu'il est possible de rentrer dans le champ."
+			},
+			"format": {
+				"label": "Formats de saisie",
+				"type": "text",
+				"default": "",
+				"pattern": null,
+				"list": [],
+				"required": false,
+				"help": "Les codes des controles de surface qui valoriseront le data-format du champ de saisie."
 			}
 		}
 	},{
@@ -31,10 +40,10 @@
 			"number": {
 				"label": "Nombre de réponses",
 				"type": "number",
-				"default": 2,
+				"default": 1,
 				"pattern": null,
 				"list": [],
-				"required": false,
+				"required": true,
 				"help": "Indique le nombre d'options à générer."
 			}
 		}
@@ -49,7 +58,7 @@
 				"default": 2,
 				"pattern": null,
 				"list": [],
-				"required": false,
+				"required": true,
 				"help": "Indique le nombre d'options à générer."
 			}
 		}
@@ -57,7 +66,17 @@
 		"name": "SELECT",
 		"shortDesc": "Liste déroulante",
 		"type": "form",
-		"options": {}
+		"options": {
+			"listeOptions": {
+				"label": "Collection (valeurs)",
+				"type": "string",
+				"default": "",
+				"pattern": null,
+				"list": [],
+				"required": false,
+				"help": "Attribut Java de type Collection dans lequel est stocké la liste des objets stockés dans la liste déroulante"
+			}
+		}
 	},{
 		"name": "TEXTAREA",
 		"shortDesc": "Champs de saisie libre",
@@ -71,12 +90,21 @@
 				"list": [],
 				"required": false,
 				"help": "Indique la limite de caractères qu'il est possible de rentrer dans le champ (si renseigné, devient un billet)."
+			},
+			"format": {
+				"label": "Formats de saisie",
+				"type": "text",
+				"default": "",
+				"pattern": null,
+				"list": [],
+				"required": false,
+				"help": "Les codes des controles de surface qui valoriseront le data-format du champ de saisie."
 			}
 		}
 	},{
-		"name": "TEXTE",
+		"name": "TEXTE-STATIC",
 		"shortDesc": "Texte statique",
-		"type": "form",
+		"type": "textform",
 		"options": {}
 	},{
 		"name": "TITRE",
