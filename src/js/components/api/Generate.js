@@ -37,7 +37,7 @@
 	 * @returns {string} le commentaire TODO
 	 */
 	function todo(texte) {
-		return $("<!-- TODO " + app.page.trigramme + " : " + texte + " --><!--{{n}}-->");
+		return $("<!-- TODO " + app.page.user + " : " + texte + " --><!--{{n}}-->");
 	}
 
 	/**
@@ -70,13 +70,14 @@
 				"error-format": "format",
 				"label": "text",
 				"help-btn": "title",
-				"help-content": "info"
+				"help-content": "info",
+				"text": "text"
 			},
 			suffix = null,
 			cle = null;
 		suffix = (types.hasOwnProperty(type)) ? types[type] : type;
 		cle = prefixDemarche + "." + prefixPage + "." + prefixChamp + "." + suffix;
-		listeProperties.push(cle);
+		listeProperties.push({key: cle, value: ""});
 		return cle;
 	}
 
@@ -175,7 +176,9 @@
 	 * @returns {object} le label
 	 */
 	function genererLabel(idInput, idLabel, element, options) {
-		var $label = null;
+		var $label = null,
+			idBtnInfobulle = null,
+			idContentInfobulle = null;
 
 		if (element.name == "CHECK" || element.name == "RADIO") {
 			$label = $("<div>").addClass("control-label col-md-12").attr({
@@ -203,8 +206,8 @@
 
 		// on vérifie si le champ a une infobulle
 		if (options.hasInfobulle && options.hasInfobulle.val) {
-			var idBtnInfobulle = determinerIdElement("btnHelp", options),
-				idContentInfobulle = determinerIdElement("help", options);
+			idBtnInfobulle = determinerIdElement("btnHelp", options);
+			idContentInfobulle = determinerIdElement("help", options);
 			commentaire("Le bouton de l'infobulle", $label);
 			generateBtnInfobulle(options, idBtnInfobulle, idContentInfobulle).appendTo($label);
 			breakLine($label);
@@ -395,14 +398,15 @@
 		$input = $("<input>").addClass("").attr({
 			"type": "checkbox",
 			"th:field": "${" + options.attributJava.val + "}",
-			"value": "valeur" + index,
+			"th:value": "#{" + generateCleProperties(options, "valeur" + index + ".val") + "}",
 			"aria-describedby": idLabel,
 			"aria-invalid": "false",
 			"id": idValue
 		}).appendTo($label);
 		breakLine($label);
+
 		$("<span>").attr({
-			"th:text": "#{" + generateCleProperties(options, "valeur" + index) + "}"
+			"th:text": "#{" + generateCleProperties(options, "valeur" + index + ".text") + "}"
 		}).appendTo($label);
 		breakLine($label);
 
@@ -462,6 +466,38 @@
 	}
 
 	/**
+	 * Génére un textarea.
+	 * @author JJACQUES
+	 * @param {string} idInput l'id du champ de saisie
+	 * @param {object}   options les options de l'élément
+	 * @return {object} le textarea
+	 */
+	function generateTextarea(idInput, options) {
+		var $textarea = $("<textarea>").addClass("form-control").attr({
+			"aria-invalid": "false",
+			"id": idInput,
+			"th:field": "${" + options.attributJava.val + "}"
+		});
+
+		// Déterminer si le champ de saisie à une limite de caractères
+		if (options.maxLength != null && options.maxLength.val != "") {
+			makeFieldMaxLength(options.maxLength.val);
+		}
+
+		// Déterminer si le champ de saisie est obligatoire
+		if (options.required != null && options.required.val != "") {
+			makeFieldRequired(options.required.val);
+		}
+
+		// Déterminer si le champ de saisie est désactivé
+		if (options.disabled != null && options.disabled.val != "") {
+			makeFieldDisabled(options.disabled.val);
+		}
+
+		return $textarea;
+	}
+
+	/**
 	 * Génère un champ de saisie.
 	 * @author JJACQUES
 	 * @param   {string} idInput l'id de l'input
@@ -494,6 +530,7 @@
 			breakLine($inputContainer);
 			if (options.number != null && options.number.val > 0) {
 				for (i; i < options.number.val; i++) {
+					breakLine($inputContainer);
 					$inputPres = genererRadioContainer();
 					$inputPres.appendTo($inputContainer);
 					breakLine($inputPres);
@@ -511,7 +548,11 @@
 			breakLine($inputContainer);
 			return $inputContainer;
 		} else if (element.name == "TEXTAREA") {
-			throw "Non développé.";
+			$inputContainer = $("<div>");
+			breakLine($inputContainer);
+			generateTextarea(idInput, options).appendTo($inputContainer);
+			breakLine($inputContainer);
+			return $inputContainer;
 		}
 	}
 
@@ -550,11 +591,67 @@
 	}
 
 	/**
+	 * Détermine si une ligne contient une balise ouvrante
+	 * @author JJACQUES
+	 * @param   {string}   ligne la ligne
+	 * @returns {boolean}
+	 */
+	function hasBaliseOuvrante(ligne) {
+		return (ligne.match(/^<[a-z!]/gi)) ? true : false;
+	}
+
+	/**
+	 * Détermine si une ligne contient une balise fermante
+	 * @author JJACQUES
+	 * @param   {string}   ligne la ligne
+	 * @returns {boolean}
+	 */
+	function hasBaliseFermante(ligne) {
+		return (ligne.match(/(<\/|(\-\->|\/>))/gi)) ? true : false;
+	}
+
+	function formatTemplateFromAtelier(template, nbTab) {
+		var regExp = new RegExp(/(^.*$)/gim),
+			lignes = [],
+			i = 0,
+			t = 0,
+			etatTab = 0,
+			subEtatTab = 0;
+		lignes = template.match(regExp);
+		if (lignes != null) {
+			for (i; i < lignes.length; i++) {
+				subEtatTab = 0;
+
+				if (lignes[i].indexOf("<input") != -1) {
+					lignes[i] = lignes[i].replace(">", "/>");
+				}
+
+				if (hasBaliseOuvrante(lignes[i]) && !hasBaliseFermante(lignes[i])) {
+					subEtatTab++;
+				} else if (hasBaliseFermante(lignes[i]) && !hasBaliseOuvrante(lignes[i])) {
+					etatTab--;
+				}
+
+				t = 0;
+				if (i != 0) {
+					while (t < nbTab + etatTab) {
+						lignes[i] = "\t" + lignes[i];
+						t++;
+					}
+				}
+				etatTab += subEtatTab;
+			}
+			template = lignes.join("\n");
+		}
+		return template;
+	}
+
+	/**
 	 * Génère le contenu à partir des données de l'atelier.
 	 * @author JJACQUES
 	 * @param {object} $atelier les objets issus de l'atelier
 	 */
-	function generateFromAtelier($atelier) {
+	function generateFromAtelier($atelier, nbTab) {
 		var $htmlGenere = $("<div>"),
 			htmlString = "",
 			regExp = new RegExp(/<!\-\-\{\{n\}\}\-\->/gi);
@@ -577,9 +674,19 @@
 							}
 						}
 					} else if (typeElement.type == "text") {
-						// si l'élément est de type texte
-						throw "non développé.";
+						if (typeElement.name == "PARA-GRAPH") {
+							$element = $("<p>").attr({
+								"th:utext": generateCleProperties(options, "text")
+							});
+						} else if (typeElement.name == "TITRE") {
+							if (options.niveau != null && options.niveau.val != "") {
+								$element = $("<h" + options.niveau.val + ">").attr({
+									"th:utext": generateCleProperties(options, "text")
+								});
+							}
+						}
 					}
+					commentaire("Element " + options.codeChamp.val, $htmlGenere);
 					$htmlGenere.append($element);
 					breakLine($htmlGenere);
 				}
@@ -587,6 +694,7 @@
 		}
 
 		htmlString = $htmlGenere[0].outerHTML.replace(regExp, "\n");
+		htmlString = formatTemplateFromAtelier(htmlString, nbTab);
 		return htmlString;
 	}
 
@@ -598,10 +706,17 @@
 	 */
 	function replaceContent(template) {
 		var regExp = new RegExp("{{content}}", "gi"),
-			$atelier = app.api.atelier.getContenuAtelier();
+			$atelier = app.api.atelier.getContenuAtelier(),
+			// on recherche le nombre de tabulation il y a devant {{content}}
+			lineContent = template.match(/^\t*\{\{content\}\}/gim),
+			nbTab = 0;
+
+		if (lineContent != null && lineContent.length) {
+			nbTab = lineContent[0].indexOf("{{content}}");
+		}
 
 		if ($atelier != null) {
-			$atelier = generateFromAtelier($atelier);
+			$atelier = generateFromAtelier($atelier, nbTab);
 		}
 
 		return template.replace(regExp, $atelier);
@@ -635,6 +750,22 @@
 		}
 	}
 
+	function generateProperties() {
+		var i = 0,
+			$container = null;
+		$(".messages-page").children().remove();
+		if (listeProperties != null && listeProperties.length) {
+			for (i; i < listeProperties.length; i++) {
+				$container = $("<div>").attr({
+					"data-index": i
+				});
+				$("<a>").text(listeProperties[i].key).appendTo($container);
+				$("<span>").text(listeProperties[i].value).appendTo($container);
+				$container.appendTo($(".messages-page"));
+			}
+		}
+	}
+
 	app.api.generate = {
 		init: function () {
 			$("#btnGenerate").on("click", function () {
@@ -645,7 +776,10 @@
 					}
 					if (dataHtml != null) {
 						template = initialiserTemplate(dataHtml);
-						$(".html-page pre").text(template);
+						$("#sourceHTML").text(template);
+						$("#visualiserHTML").html(template);
+
+						generateProperties();
 					}
 				});
 			});
