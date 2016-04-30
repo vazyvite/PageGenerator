@@ -18,8 +18,9 @@
 	 */
 	function getOptionsParType(typeElement) {
 		var mapTypeOption = {
-				"form": ["required", "disabled", "hasInfobulle", "codeChamp", "format", "attributJava"],
-				"text": ["codeChamp", "attributJavaText"]
+				"form": ["required", "disabled", "hasInfobulle", "codeChamp", "attributJava"],
+				"textform": ["codeChamp", "attributJavaText"],
+				"text": ["codeChamp"]
 			},
 			options = {},
 			i = 0;
