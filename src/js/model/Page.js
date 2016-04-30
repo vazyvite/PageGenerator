@@ -8,6 +8,7 @@ function Page() {
 	that.model = "";
 	that.prefixDemarche = "";
 	that.prefixPage = "";
+	that.user = "";
 
 	/**
 	 * Set la valeur dans l'attribut identifié par key.
@@ -30,17 +31,11 @@ function Page() {
 		var formModal = {
 			className: "col-md-10 col-md-offset-1",
 			listFormGroups: [{
-				label: "IdPage",
-				id: "msp_idPage",
+				label: "Trigramme",
+				id: "msp_trigramme",
 				requis: true,
-				infobulle: "Identifiant permettant d'identifier la page dans le code Javascript.",
-				valeurDefault: localStorage.getItem("idPage")
-			}, {
-				label: "Model",
-				id: "msp_model",
-				requis: true,
-				infobulle: "Nom du model auquel est rattaché la page tel qu'il apparait dans le demarche-flow.xml.",
-				valeurDefault: localStorage.getItem("model")
+				infobulle: "Les 3 lettres permettant d'identifier le développeur.",
+				valeurDefault: localStorage.getItem("trigramme")
 			}, {
 				label: "Code démarche (préfix messages properties de la démarche)",
 				id: "msp_prefixDemarche",
@@ -48,7 +43,19 @@ function Page() {
 				infobulle: "Le préfix de la demarche permettant de construire les messages properties de la démarche.",
 				valeurDefault: localStorage.getItem("prefixDemarche")
 			}, {
-				label: "Préfix page (préfix messages properties de la page)",
+				label: "Identifiant de Page",
+				id: "msp_idPage",
+				requis: true,
+				infobulle: "Identifiant permettant d'identifier la page dans le code Javascript.",
+				valeurDefault: localStorage.getItem("idPage")
+			}, {
+				label: "Nom du Model",
+				id: "msp_model",
+				requis: true,
+				infobulle: "Nom du model auquel est rattaché la page tel qu'il apparait dans le demarche-flow.xml.",
+				valeurDefault: localStorage.getItem("model")
+			}, {
+				label: "Préfix de properties page",
 				id: "msp_prefixPage",
 				requis: true,
 				infobulle: "Le préfix de la page permettant de construire les messages properties de la page.",
