@@ -32,10 +32,10 @@ function Page() {
 			className: "col-md-10 col-md-offset-1",
 			listFormGroups: [{
 				label: "Trigramme",
-				id: "msp_trigramme",
+				id: "msp_user",
 				requis: true,
 				infobulle: "Les 3 lettres permettant d'identifier le développeur.",
-				valeurDefault: localStorage.getItem("trigramme")
+				valeurDefault: localStorage.getItem("user")
 			}, {
 				label: "Code démarche (préfix messages properties de la démarche)",
 				id: "msp_prefixDemarche",
@@ -69,11 +69,15 @@ function Page() {
 			if (validationModal) {
 				// initialisation de la page Atelier
 				app.api.atelier.init();
+				// initialisation de la page HTML
+				app.api.html.init();
+
 				// sauvegarde des informations de la page dans le localStorage et dans le model Page
 				that.setValue("idPage", $modal.find("#msp_idPage").val());
 				that.setValue("model", $modal.find("#msp_model").val());
 				that.setValue("prefixDemarche", $modal.find("#msp_prefixDemarche").val());
 				that.setValue("prefixPage", $modal.find("#msp_prefixPage").val());
+				that.setValue("user", $modal.find("#msp_user").val());
 				app.page = that;
 				return true;
 			} else {
