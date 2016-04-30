@@ -1,5 +1,5 @@
 /*jslint eqeq: true, plusplus: true*/
-/*globals app, jQuery, require*/
+/*globals app, jQuery, require, confirm*/
 (function ($) {
 	"use strict";
 
@@ -265,6 +265,27 @@
 					$(this).parents("." + PAGE_LINE_CLASSNAME).remove();
 				}).on("click", ".btn-edit", function () {
 					createModaleForUiElement($(this).parents("." + PAGE_LINE_CLASSNAME + ":first"), null, null);
+				}).on("keydown", "." + PAGE_LINE_CLASSNAME, function (event) {
+					var $this = $(this);
+					if (event.keyCode == 46 && confirm("Voulez-vous supprimer l'élément sélectionné ?\nCette action est définitive.")) {
+						$this.remove();
+					} else if (event.keyCode == 38) {
+						if ($this.prev("." + PAGE_LINE_CLASSNAME).size()) {
+							$this.prev("." + PAGE_LINE_CLASSNAME).focus();
+						} else {
+							$this.parent().find("." + PAGE_LINE_CLASSNAME + ":last").focus();
+						}
+					} else if (event.keyCode == 40) {
+						if ($this.next("." + PAGE_LINE_CLASSNAME).size()) {
+							$this.next("." + PAGE_LINE_CLASSNAME).focus();
+						} else {
+							$this.parent().find("." + PAGE_LINE_CLASSNAME + ":first").focus();
+						}
+					}
+				}).on("keypress", "." + PAGE_LINE_CLASSNAME, function (event) {
+					if (event.keyCode == 13) {
+						createModaleForUiElement($(this), null, null);
+					}
 				});
 			}
 		},
@@ -276,6 +297,16 @@
 		 */
 		getContenuAtelier: function () {
 			return $("." + ATELIER_PAGE_CLASSNAME).find("." + PAGE_LINE_CLASSNAME);
+		},
+
+		/**
+		 * Réinitialise tout l'atelier
+		 * @author JJACQUES
+		 */
+		reset: function () {
+			if (confirm("Voulez-vous annuler toutes vos modifications ?\nCette action est définitive.")) {
+				$("." + ATELIER_PAGE_CLASSNAME).find("." + PAGE_LINE_CLASSNAME).remove();
+			}
 		}
 	};
 }(jQuery));

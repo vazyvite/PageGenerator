@@ -14,6 +14,10 @@
 				app.core.validation.init();
 				app.api.generate.init();
 				app.page.drawModal();
+
+				$("#btnReset").on("click", function () {
+					app.api.atelier.reset();
+				});
 			}
 		},
 		api: {}
