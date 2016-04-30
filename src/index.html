@@ -12,7 +12,7 @@
     </head>
     <body>
 		<header class="row">
-			<h1>
+			<h1 class="beta">
 				Page Generator
 				<span class="dila-circle indigo"></span>
 				<span class="dila-circle orange"></span>
@@ -35,12 +35,12 @@
 			<div>
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="active"><a href="#tabAtelier" aria-controls="tabAtelier" role="tab" data-toggle="tab">Atelier</a></li>
+					<li role="presentation" class="active"><a class="beta" href="#tabAtelier" aria-controls="tabAtelier" role="tab" data-toggle="tab">Atelier</a></li>
 					<li role="presentation"><a href="#tabHtml" aria-controls="tabHtml" role="tab" data-toggle="tab">HTML</a></li>
-					<li role="presentation"><a href="#tabJava" aria-controls="tabJava" role="tab" data-toggle="tab">Java</a></li>
-					<li role="presentation"><a href="#tabViewXml" aria-controls="tabViewXml" role="tab" data-toggle="tab">view.xml</a></li>
-					<li role="presentation"><a href="#tabDemarcheFlow" aria-controls="tabDemarcheFlow" role="tab" data-toggle="tab">demarche-flow</a></li>
-					<li role="presentation"><a href="#tabProperties" aria-controls="settings" role="tab" data-toggle="tab">properties</a></li>
+					<li role="presentation"><a class="alpha" href="#tabJava" aria-controls="tabJava" role="tab" data-toggle="tab">Java</a></li>
+					<li role="presentation"><a class="alpha" href="#tabViewXml" aria-controls="tabViewXml" role="tab" data-toggle="tab">view.xml</a></li>
+					<li role="presentation"><a class="alpha" href="#tabDemarcheFlow" aria-controls="tabDemarcheFlow" role="tab" data-toggle="tab">demarche-flow</a></li>
+					<li role="presentation"><a class="beta" href="#tabProperties" aria-controls="settings" role="tab" data-toggle="tab">properties</a></li>
 				</ul>
 
 				<!-- Tab panes -->
@@ -52,9 +52,16 @@
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane" id="tabHtml">
+						<div class="menu">
+							<div class="btn-group pull-right" role="group" aria-label="...">
+								<button id="showSource" type="button" class="btn btn-primary">Source HTML</button>
+								<button id="showVisualiser" type="button" class="btn btn-default beta">Visualiser</button>
+							</div>
+						</div>
 						<div class="html-content onglet-content">
 							<div class="html-page">
-								<pre></pre>
+								<pre id="sourceHTML">cliquer sur le bouton <button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-flash"></span> Générer</button> pour générer le code HTML de la page.</pre>
+								<div id="visualiserHTML" class="hide"></div>
 							</div>
 						</div>
 					</div>
@@ -91,6 +98,7 @@
 		<script type="text/javascript" src="js/components/core/Validation.js"></script>
 		<script type="text/javascript" src="js/components/core/Modal.js"></script>
 		<script type="text/javascript" src="js/components/api/Atelier.js"></script>
+		<script type="text/javascript" src="js/components/api/Html.js"></script>
 		<script type="text/javascript" src="js/components/api/Generate.js"></script>
     </body>
 </html>
