@@ -37,3 +37,19 @@ summary {
 		display: inline-block;
 	}
 }
+
+.beta:after {
+	content: "beta";
+	font-size: 14px;
+	color: orange;
+	text-transform: none;
+	margin-left: 3px;
+}
+
+.alpha:after {
+	content: "alpha";
+	font-size: 14px;
+	color: firebrick;
+	text-transform: none;
+	margin-left: 3px;
+}

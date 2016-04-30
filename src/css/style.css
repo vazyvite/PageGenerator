@@ -70,6 +70,22 @@ summary {
   summary h1, summary h2, summary h3, summary h4, summary h5, summary h6 {
     display: inline-block; }
 
+/* line 41, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_global.scss */
+.beta:after {
+  content: "beta";
+  font-size: 14px;
+  color: orange;
+  text-transform: none;
+  margin-left: 3px; }
+
+/* line 49, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_global.scss */
+.alpha:after {
+  content: "alpha";
+  font-size: 14px;
+  color: firebrick;
+  text-transform: none;
+  margin-left: 3px; }
+
 /* line 3, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_charteDILA.scss */
 .dila-circle {
   display: inline-block;
@@ -385,18 +401,47 @@ td details .container {
           color: #DDD; }
     /* line 73, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
     #tabAtelier .atelier-content .atelier-page .page-line {
-      height: 34px; }
-      /* line 76, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+      height: 40px;
+      padding: 2px 15px 0 15px;
+      border-radius: 5px; }
+      /* line 78, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
       #tabAtelier .atelier-content .atelier-page .page-line span {
         height: 34px;
         display: inline-block;
         padding-top: 7px; }
-      /* line 81, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+      /* line 83, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
       #tabAtelier .atelier-content .atelier-page .page-line button {
         display: none; }
-      /* line 86, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
-      #tabAtelier .atelier-content .atelier-page .page-line:hover button,
-      #tabAtelier .atelier-content .atelier-page .page-line:focus button {
-        display: inline; }
+      /* line 87, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+      #tabAtelier .atelier-content .atelier-page .page-line:hover,
+      #tabAtelier .atelier-content .atelier-page .page-line:focus {
+        background-color: #f0f0F0; }
+        /* line 90, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+        #tabAtelier .atelier-content .atelier-page .page-line:hover button,
+        #tabAtelier .atelier-content .atelier-page .page-line:focus button {
+          display: inline; }
+
+/* line 2, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_html.scss */
+#tabHtml .menu {
+  position: absolute;
+  height: 60px;
+  width: 100%;
+  padding: 15px;
+  background-color: #333; }
+
+/* line 9, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_html.scss */
+#tabHtml .html-content {
+  position: absolute;
+  top: 60px; }
+  /* line 13, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_html.scss */
+  #tabHtml .html-content pre#sourceHTML {
+    display: block;
+    overflow: auto;
+    width: calc(100% - 30px);
+    margin: 0 15px;
+    white-space: pre-wrap; }
+  /* line 21, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_html.scss */
+  #tabHtml .html-content .visualiserHTML {
+    display: none; }
 
 /*# sourceMappingURL=style.css.map */

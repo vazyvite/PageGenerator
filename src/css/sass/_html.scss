@@ -1,0 +1,25 @@
+#tabHtml {
+	.menu {
+		position: absolute;
+		height: 60px;
+		width: 100%;
+		padding: 15px;
+		background-color: $color_gris3;
+	}
+	.html-content {
+		position: absolute;
+		top: 60px;
+
+		pre#sourceHTML {
+			display: block;
+			overflow: auto;
+			width: calc(100% - 30px);
+			margin: 0 15px;
+			white-space: pre-wrap;
+		}
+
+		.visualiserHTML {
+			display: none;
+		}
+	}
+}
