@@ -1,12 +1,12 @@
 /*jslint eqeq: true, plusplus: true*/
-/*globals jQuery, app, require*/
+/*globals jQuery, app, require, console*/
 (function ($) {
 	"use strict";
 
 	var file_template = "./js/data/template.html",
 		ID_CONTENT_PAGE = "content-page",
-		listeID = [],
-		listeProperties = [];
+		listeID = [];
+//		listeProperties = [];
 
 	/**
 	 * Génère un saut de ligne.
@@ -74,10 +74,12 @@
 				"text": "text"
 			},
 			suffix = null,
-			cle = null;
+			cle = null,
+			value = "";
 		suffix = (types.hasOwnProperty(type)) ? types[type] : type;
 		cle = prefixDemarche + "." + prefixPage + "." + prefixChamp + "." + suffix;
-		listeProperties.push({key: cle, value: ""});
+//		listeProperties.push({key: cle, value: ""});
+		app.api.properties.addProperties(cle, value);
 		return cle;
 	}
 
@@ -587,7 +589,7 @@
 	 */
 	function initialiserGeneration() {
 		listeID = [];
-		listeProperties = [];
+//		listeProperties = [];
 	}
 
 	/**
@@ -667,12 +669,12 @@
 
 				if ($uiElement != null && options != null && typeElement != null) {
 					if (typeElement.type == "form" || typeElement.type == "textform") {
-						// si l'élément est de type form
-						for (option in options) {
-							if (options.hasOwnProperty(option)) {
-								$element = initialiserFormElement(typeElement, options);
-							}
-						}
+						// si l'élément est de type form ou textform
+//						for (option in options) {
+//							if (options.hasOwnProperty(option)) {
+						$element = initialiserFormElement(typeElement, options);
+//							}
+//						}
 					} else if (typeElement.type == "text") {
 						if (typeElement.name == "PARA-GRAPH") {
 							$element = $("<p>").attr({
@@ -750,23 +752,42 @@
 		}
 	}
 
+	/**
+	 * Génère les properties.
+	 * @author JJACQUES
+	 */
 	function generateProperties() {
 		var i = 0,
-			$container = null;
+			$container = null,
+			listeProperties = app.api.properties.getListeProperties();
 		$(".messages-page").children().remove();
 		if (listeProperties != null && listeProperties.length) {
 			for (i; i < listeProperties.length; i++) {
-				$container = $("<div>").attr({
+				$container = $("<div>");
+				$("<a>").addClass("cleProperties").attr({
+					"title": "Cliquer pour définir le libellé",
 					"data-index": i
-				});
-				$("<a>").text(listeProperties[i].key).appendTo($container);
-				$("<span>").text(listeProperties[i].value).appendTo($container);
+				}).text(listeProperties[i].cle).appendTo($container);
+				$("<span>").text(":").appendTo($container);
+				$("<span>").addClass("valueProperties").text(listeProperties[i].value).appendTo($container);
 				$container.appendTo($(".messages-page"));
 			}
 		}
 	}
 
+	/**
+	 * Génère le view.xml.
+	 * @author JJACQUES
+	 */
+	function generateViewXml() {
+
+	}
+
 	app.api.generate = {
+		/**
+		 * Méthode d'initialisation.
+		 * @author JJACQUES
+		 */
 		init: function () {
 			$("#btnGenerate").on("click", function () {
 				var templatePage = require("fs").readFile(file_template, "utf8", function (err, dataHtml) {
