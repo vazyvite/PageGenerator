@@ -43,12 +43,6 @@ function Page() {
 				infobulle: "Le préfix de la demarche permettant de construire les messages properties de la démarche.",
 				valeurDefault: localStorage.getItem("prefixDemarche")
 			}, {
-				label: "Identifiant de Page",
-				id: "msp_idPage",
-				requis: true,
-				infobulle: "Identifiant permettant d'identifier la page dans le code Javascript.",
-				valeurDefault: localStorage.getItem("idPage")
-			}, {
 				label: "Nom du Model",
 				id: "msp_model",
 				requis: true,
@@ -60,6 +54,12 @@ function Page() {
 				requis: true,
 				infobulle: "Le préfix de la page permettant de construire les messages properties de la page.",
 				valeurDefault: localStorage.getItem("prefixPage")
+			}, {
+				label: "Identifiant JS de Page",
+				id: "msp_idPage",
+				requis: true,
+				infobulle: "Identifiant permettant d'identifier la page dans le code Javascript.",
+				valeurDefault: localStorage.getItem("idPage")
 			}]
 		};
 
@@ -71,6 +71,8 @@ function Page() {
 				app.api.atelier.init();
 				// initialisation de la page HTML
 				app.api.html.init();
+				// initialisation de la page Properties
+				app.api.properties.init();
 
 				// sauvegarde des informations de la page dans le localStorage et dans le model Page
 				that.setValue("idPage", $modal.find("#msp_idPage").val());
