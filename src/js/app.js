@@ -18,6 +18,10 @@
 				$("#btnReset").on("click", function () {
 					app.api.atelier.reset();
 				});
+
+				$("#btnOptions").on("click", function () {
+					app.page.drawModal();
+				});
 			}
 		},
 		api: {}
