@@ -86,7 +86,7 @@
 	 * @author JJACQUES
 	 * @param {object} $tag l'objet déposé à convertir en pageline
 	 */
-	function convertPageLine($tag) {
+	function convertPageLine($tag, uiElement) {
 		if ($tag != null) {
 			$tag.addClass(PAGE_LINE_CLASSNAME).removeClass(DROPBAG_CLASSNAME + " dragover");
 			$tag.attr({
@@ -151,10 +151,17 @@
 				}
 			}
 			app.core.modal.drawModal("addUiElement", titreModal, content, true, function () {
-				var validationModal = app.core.validation.valideForm($("#addUiElement"));
+				var validationModal = app.core.validation.valideForm($("#addUiElement")),
+					typeString = null,
+					$uiContent = null;
 				if (validationModal) {
 					if (initialUiElement != null) {
-						uiElement.find(".uiElement-content").text(initialUiElement[0].innerText.trim() + "#" + $("#modal_codeChamp").val());
+						typeString = initialUiElement[0].innerText.trim();
+						$uiContent = uiElement.find(".uiElement-content").attr({
+							"title": typeString
+						});
+						$("<span>").addClass("ui-" + typeString).appendTo($uiContent);
+						$("<span>").addClass("text").text("#" + $("#modal_codeChamp").val()).appendTo($uiContent);
 					}
 					$("#addUiElement .app-modal-content :input").each(function () {
 						var $this = $(this),
@@ -251,13 +258,13 @@
 							convertPageLine($this);
 
 							$("." + ATELIER_PAGE_CLASSNAME + " ." + DROPBAG_CLASSNAME).remove();
-							dropUiElement($(this), app.api.atelier.draggedUIElement, null);
+							dropUiElement($this, app.api.atelier.draggedUIElement, null);
 						}).on("dragleave", "." + ATELIER_PAGE_CLASSNAME, function (event) {
 							event.preventDefault();
 						}).on("dragend", "[draggable=true]", function (event) {
 							$("." + ATELIER_PAGE_CLASSNAME + " ." + DROPBAG_CLASSNAME).remove();
 						});
-						app.api.atelier.init = true;
+						app.api.atelier.isInitialisated = true;
 					});
 				});
 
@@ -306,6 +313,7 @@
 		reset: function () {
 			if (confirm("Voulez-vous annuler toutes vos modifications ?\nCette action est définitive.")) {
 				$("." + ATELIER_PAGE_CLASSNAME).find("." + PAGE_LINE_CLASSNAME).remove();
+				app.api.properties.reset();
 			}
 		}
 	};
