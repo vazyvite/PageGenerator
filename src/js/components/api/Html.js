@@ -1,5 +1,5 @@
 /*jslint eqeq: true, plusplus: true*/
-/*globals jQuery, app*/
+/*globals jQuery, app, Clipboard*/
 (function ($) {
 	"use strict";
 
@@ -9,8 +9,8 @@
 	 * @param {object} that le bouton d'affichage des sources HTML
 	 */
 	function afficherSourceHTML(that) {
-		$(that).removeClass("btn-default").addClass("btn-primary");
-		$("#showVisualiser").removeClass("btn-primary").addClass("btn-default");
+		$(that).removeClass("btn-default");
+		$("#showVisualiser").addClass("btn-default");
 		$("#sourceHTML").removeClass("hide");
 		$("#visualiserHTML").addClass("hide");
 	}
@@ -21,8 +21,8 @@
 	 * @param {object} that le bouton d'affichage de la visualisation
 	 */
 	function afficherVisualisation(that) {
-		$(that).removeClass("btn-default").addClass("btn-primary");
-		$("#showSource").removeClass("btn-primary").addClass("btn-default");
+		$(that).removeClass("btn-default");
+		$("#showSource").addClass("btn-default");
 		$("#sourceHTML").addClass("hide");
 		$("#visualiserHTML").removeClass("hide");
 	}
@@ -41,6 +41,8 @@
 			$("#showVisualiser").on("click", function () {
 				afficherVisualisation(this);
 			});
+
+			new Clipboard('#selectHTML');
 		}
 	};
 }(jQuery));
