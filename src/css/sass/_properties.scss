@@ -1,0 +1,21 @@
+#tabProperties {
+	.menu {
+		position: absolute;
+		height: 60px;
+		width: 100%;
+		padding: 15px;
+		background-color: $color_gris3;
+	}
+	.messages-content {
+		position: absolute;
+		top: 60px;
+
+		.messages-page {
+			margin: 0 20px;
+
+			.cleProperties {
+				cursor: pointer;
+			}
+		}
+	}
+}

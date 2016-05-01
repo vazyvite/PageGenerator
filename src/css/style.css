@@ -405,21 +405,114 @@ td details .container {
       padding: 2px 15px 0 15px;
       border-radius: 5px; }
       /* line 78, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
-      #tabAtelier .atelier-content .atelier-page .page-line span {
-        height: 34px;
-        display: inline-block;
-        padding-top: 7px; }
-      /* line 83, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
       #tabAtelier .atelier-content .atelier-page .page-line button {
         display: none; }
-      /* line 87, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+      /* line 82, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
       #tabAtelier .atelier-content .atelier-page .page-line:hover,
       #tabAtelier .atelier-content .atelier-page .page-line:focus {
         background-color: #f0f0F0; }
-        /* line 90, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+        /* line 85, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
         #tabAtelier .atelier-content .atelier-page .page-line:hover button,
         #tabAtelier .atelier-content .atelier-page .page-line:focus button {
           display: inline; }
+      /* line 89, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+      #tabAtelier .atelier-content .atelier-page .page-line .text {
+        display: inline-block;
+        padding-top: 4px;
+        padding-left: 9px;
+        vertical-align: middle; }
+      /* line 95, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+      #tabAtelier .atelier-content .atelier-page .page-line [class^='ui-'] {
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+        border: 1px solid #333;
+        border-radius: 100px;
+        box-shadow: 0 1px 3px #333;
+        padding-top: 4px;
+        vertical-align: middle;
+        margin-top: 3px; }
+      /* line 106, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+      #tabAtelier .atelier-content .atelier-page .page-line .ui-INPUT {
+        background-color: #D76500; }
+        /* line 109, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+        #tabAtelier .atelier-content .atelier-page .page-line .ui-INPUT:before {
+          content: "In";
+          position: relative;
+          left: 8px;
+          top: -1px;
+          text-align: center; }
+      /* line 117, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+      #tabAtelier .atelier-content .atelier-page .page-line .ui-CHECK {
+        background-color: #D76500; }
+        /* line 120, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+        #tabAtelier .atelier-content .atelier-page .page-line .ui-CHECK:before {
+          content: "Ch";
+          position: relative;
+          left: 5px;
+          top: -1px;
+          text-align: center; }
+      /* line 128, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+      #tabAtelier .atelier-content .atelier-page .page-line .ui-RADIO {
+        background-color: #D76500; }
+        /* line 131, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+        #tabAtelier .atelier-content .atelier-page .page-line .ui-RADIO:before {
+          content: "Ra";
+          position: relative;
+          left: 5px;
+          top: -1px;
+          text-align: center; }
+      /* line 139, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+      #tabAtelier .atelier-content .atelier-page .page-line .ui-SELECT {
+        background-color: #D76500; }
+        /* line 142, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+        #tabAtelier .atelier-content .atelier-page .page-line .ui-SELECT:before {
+          content: "Se";
+          position: relative;
+          left: 5px;
+          top: -1px;
+          text-align: center; }
+      /* line 150, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+      #tabAtelier .atelier-content .atelier-page .page-line .ui-TEXTAREA {
+        background-color: #D76500; }
+        /* line 153, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+        #tabAtelier .atelier-content .atelier-page .page-line .ui-TEXTAREA:before {
+          content: "Tx";
+          position: relative;
+          left: 6px;
+          top: -1px;
+          text-align: center; }
+      /* line 161, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+      #tabAtelier .atelier-content .atelier-page .page-line .ui-TEXTE-STATIC {
+        background-color: #D76500; }
+        /* line 164, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+        #tabAtelier .atelier-content .atelier-page .page-line .ui-TEXTE-STATIC:before {
+          content: "St";
+          position: relative;
+          left: 7px;
+          top: -1px;
+          text-align: center; }
+      /* line 172, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+      #tabAtelier .atelier-content .atelier-page .page-line .ui-TITRE {
+        background-color: #DA4FA0; }
+        /* line 175, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+        #tabAtelier .atelier-content .atelier-page .page-line .ui-TITRE:before {
+          content: "H";
+          position: relative;
+          left: 8px;
+          top: -1px;
+          text-align: center; }
+      /* line 183, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+      #tabAtelier .atelier-content .atelier-page .page-line .ui-PARA-GRAPH {
+        background-color: #5F48A2; }
+        /* line 186, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
+        #tabAtelier .atelier-content .atelier-page .page-line .ui-PARA-GRAPH:before {
+          content: "P";
+          position: relative;
+          left: 8px;
+          top: -1px;
+          text-align: center;
+          color: #FFFFFF; }
 
 /* line 2, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_html.scss */
 #tabHtml .menu {
@@ -443,5 +536,24 @@ td details .container {
   /* line 21, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_html.scss */
   #tabHtml .html-content .visualiserHTML {
     display: none; }
+
+/* line 2, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_properties.scss */
+#tabProperties .menu {
+  position: absolute;
+  height: 60px;
+  width: 100%;
+  padding: 15px;
+  background-color: #333; }
+
+/* line 9, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_properties.scss */
+#tabProperties .messages-content {
+  position: absolute;
+  top: 60px; }
+  /* line 13, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_properties.scss */
+  #tabProperties .messages-content .messages-page {
+    margin: 0 20px; }
+    /* line 16, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_properties.scss */
+    #tabProperties .messages-content .messages-page .cleProperties {
+      cursor: pointer; }
 
 /*# sourceMappingURL=style.css.map */
