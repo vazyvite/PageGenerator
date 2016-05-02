@@ -24,11 +24,26 @@
 	 * @param {string} value la valeur de la propertie
 	 */
 	function updatePropertie(index, value) {
+		var i = 0,
+			valProperties = "";
 		if (listeProperties[index]) {
 			listeProperties[index].value = value;
+			for (i; i < listeProperties.length; i++) {
+				valProperties += listeProperties[i].cle + ":" + listeProperties[i].value + "\n";
+			}
+			$("#copyProperties").val(valProperties);
 		} else {
 			throw "la propertie " + index + " n'existe pas";
 		}
+	}
+
+	/**
+	 * Création des clés de properties de base.
+	 * @author JJACQUES
+	 */
+	function addRootProperties() {
+		// création de la clé de propertie du title de la page
+		listeProperties.push(new Propertie(app.page.prefixDemarche + ".title.commons." + app.page.prefixPage));
 	}
 
 	app.api.properties = {
@@ -58,7 +73,9 @@
 				}
 			});
 
-			new Clipboard('#selectProperties');
+			addRootProperties();
+
+//			new Clipboard('#selectProperties');
 		},
 
 		/**
@@ -97,6 +114,7 @@
 		 */
 		reset: function () {
 			listeProperties = [];
+			addRootProperties();
 		}
 	};
 }(jQuery));

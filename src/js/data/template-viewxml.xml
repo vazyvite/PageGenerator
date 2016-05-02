@@ -1,3 +1,8 @@
-<view name="{{prefixPage}}">
-
-</view>
+<!--  PAGE : {{prefixPage}} -->
+<!-- TODO {{user}} : Modifier la valeur du step_breadcrumb -->
+<definition name="{{prefixPage}}" extends="standardLayout" templateType="thymeleaf" preparer="fr.gouv.dila.psl.framework.ui.mvc.preparer.PagePreparer">
+	<put-attribute name="body" value="/demarche/{{prefixPage}}.html :: content" type="thymeleaf"/>
+	<put-attribute name="xiti_xtpage" value="services::demarche_{{codeXitiDemarche}}::{{codeXitiPage}}"/>
+	<put-attribute name="step_breadcrumb" value="1"/>
+	<put-attribute name="title_key" value="{{prefixDemarche}}.title.commons.{{prefixPage}}"/>
+</definition>

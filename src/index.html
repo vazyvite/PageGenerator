@@ -39,8 +39,8 @@
 					<li role="presentation" class="active"><a href="#tabAtelier" aria-controls="tabAtelier" role="tab" data-toggle="tab">Atelier</a></li>
 					<li role="presentation"><a href="#tabHtml" aria-controls="tabHtml" role="tab" data-toggle="tab">HTML</a></li>
 					<li role="presentation"><a href="#tabProperties" aria-controls="settings" role="tab" data-toggle="tab">properties</a></li>
-					<li role="presentation"><a class="alpha" href="#tabViewXml" aria-controls="tabViewXml" role="tab" data-toggle="tab">view.xml</a></li>
-					<li role="presentation"><a class="alpha" href="#tabDemarcheFlow" aria-controls="tabDemarcheFlow" role="tab" data-toggle="tab">demarche-flow</a></li>
+					<li role="presentation"><a href="#tabViewXml" aria-controls="tabViewXml" role="tab" data-toggle="tab">view.xml</a></li>
+					<li role="presentation"><a class="beta" href="#tabDemarcheFlow" aria-controls="tabDemarcheFlow" role="tab" data-toggle="tab">demarche-flow</a></li>
 					<li role="presentation"><a class="alpha" href="#tabJava" aria-controls="tabJava" role="tab" data-toggle="tab">Java</a></li>
 				</ul>
 
@@ -54,15 +54,17 @@
 					</div>
 					<div role="tabpanel" class="tab-pane" id="tabHtml">
 						<div class="menu">
-							<button type="button" class="btn btn-default" id="selectHTML" data-clipboard-target="#copyHTML"><span class="glyphicon glyphicon-screenshot"></span> Copier</button>
+							<button type="button" class="btn btn-default selectClipboard" id="selectHTML" data-clipboard-target="#copyHTML"><span class="glyphicon glyphicon-screenshot"></span> Copier</button>
 							<div class="btn-group pull-right" role="group" aria-label="...">
 								<button id="showSource" type="button" class="btn">Source HTML</button>
 								<button id="showVisualiser" type="button" class="btn btn-default beta">Visualiser</button>
 							</div>
 						</div>
 						<div class="html-content onglet-content">
-							<div id="copyHTML" class="html-page">
-								<pre id="sourceHTML">cliquer sur le bouton <button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-flash"></span> Générer</button> pour générer le code HTML de la page.</pre>
+							<div id="htmlFileName">Nom du fichier HTML inconnu</div>
+							<div class="html-page">
+								<pre id="sourceHTML">Cliquer sur le bouton <button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-flash"></span> Générer</button> pour générer le code HTML de la page.</pre>
+								<textarea class="copy" id="copyHTML"></textarea>
 								<div id="visualiserHTML" class="hide"></div>
 							</div>
 						</div>
@@ -73,13 +75,25 @@
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane" id="tabViewXml">
+						<div class="menu">
+							<button type="button" class="btn btn-default selectClipboard" id="selectViewXML" data-clipboard-target="#copyViewXml"><span class="glyphicon glyphicon-screenshot"></span> Copier</button>
+						</div>
 						<div class="view-content onglet-content">
-							<div class="view-page"></div>
+							<div class="view-page">
+								<pre id="sourceViewXml">Cliquer sur le bouton <button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-flash"></span> Générer</button> pour générer le code XML du view.xml.</pre>
+								<textarea class="copy" id="copyViewXml"></textarea>
+							</div>
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane" id="tabDemarcheFlow">
+						<div class="menu">
+							<button type="button" class="btn btn-default selectClipboard" id="selectFlow" data-clipboard-target="#copyFlow"><span class="glyphicon glyphicon-screenshot"></span> Copier</button>
+						</div>
 						<div class="flow-content onglet-content">
-							<div class="flow-page"></div>
+							<div class="flow-page">
+								<pre id="sourceFlow">Cliquer sur le bouton <button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-flash"></span> Générer</button> pour générer le code XML du demarche-flow.xml.</pre>
+								<textarea class="copy" id="copyFlow"></textarea>
+							</div>
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane" id="tabProperties">
@@ -88,11 +102,12 @@
 								<div class="col-md-2">
 									<input type="search" id="filterProperties" class="form-control" placeholder="filtrer les clés" />
 								</div>
-								<button type="button" class="btn btn-default" id="selectProperties" data-clipboard-target="#copyProperties"><span class="glyphicon glyphicon-screenshot"></span> Copier</button>
+								<button type="button" class="btn btn-default selectClipboard" id="selectProperties" data-clipboard-target="#copyProperties"><span class="glyphicon glyphicon-screenshot"></span> Copier</button>
 							</div>
 						</div>
 						<div class="messages-content onglet-content">
-							<div id="copyProperties" class="messages-page"></div>
+							<div class="messages-page"></div>
+							<textarea class="copy" id="copyProperties"></textarea>
 						</div>
 					</div>
 				</div>
@@ -112,5 +127,6 @@
 		<script type="text/javascript" src="js/components/api/Html.js"></script>
 		<script type="text/javascript" src="js/components/api/Generate.js"></script>
 		<script type="text/javascript" src="js/components/api/Properties.js"></script>
+		<script type="text/javascript" src="js/components/api/ViewXml.js"></script>
     </body>
 </html>

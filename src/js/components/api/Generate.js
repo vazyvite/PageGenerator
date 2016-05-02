@@ -725,7 +725,7 @@
 	}
 
 	/**
-	 * Initialise le template.
+	 * Initialise le template HTML.
 	 * @author JJACQUES
 	 * @param   {string} templateData le template brute
 	 * @returns {string} le template initialisé
@@ -753,25 +753,65 @@
 	}
 
 	/**
+	 * Initialise le template du view.xml
+	 * @author JJACQUES
+	 * @param   {string} templateXml le template brute
+	 * @returns {string} le template initialisé
+	 */
+	function initialiserTemplateViewXML(templateXml) {
+		try {
+			var template = templateXml,
+				regExp = null,
+				attribut = null;
+			if (app.page != null) {
+				for (attribut in app.page) {
+					if (app.page.hasOwnProperty(attribut)) {
+						regExp = new RegExp("{{" + attribut + "}}", "gi");
+						template = template.replace(regExp, app.page[attribut]);
+					}
+				}
+			}
+			return template;
+		} catch (e) {
+			console.error(e);
+		}
+	}
+
+	/**
+	 * Créé une cle de propertie.
+	 * @author JJACQUES
+	 * @param   {number} index     l'index de la clé
+	 * @param   {object}   propertie la clé de propertie
+	 * @returns {object} la clé de propertie
+	 */
+	function creerClePropertie(index, propertie) {
+		var $container = $("<div>");
+		$("<a>").addClass("cleProperties").attr({
+			"title": "Cliquer pour définir le libellé",
+			"data-index": index
+		}).text(propertie.cle).appendTo($container);
+		$("<span>").text(":").appendTo($container);
+		$("<span>").addClass("valueProperties").text(propertie.value).appendTo($container);
+		return $container;
+	}
+
+	/**
 	 * Génère les properties.
 	 * @author JJACQUES
 	 */
 	function generateProperties() {
 		var i = 0,
 			$container = null,
-			listeProperties = app.api.properties.getListeProperties();
+			listeProperties = app.api.properties.getListeProperties(),
+			valProperties = null;
 		$(".messages-page").children().remove();
 		if (listeProperties != null && listeProperties.length) {
 			for (i; i < listeProperties.length; i++) {
-				$container = $("<div>");
-				$("<a>").addClass("cleProperties").attr({
-					"title": "Cliquer pour définir le libellé",
-					"data-index": i
-				}).text(listeProperties[i].cle).appendTo($container);
-				$("<span>").text(":").appendTo($container);
-				$("<span>").addClass("valueProperties").text(listeProperties[i].value).appendTo($container);
-				$container.appendTo($(".messages-page"));
+				creerClePropertie(i, listeProperties[i]).appendTo($(".messages-page"));
+				valProperties += listeProperties[i].cle + ":" + listeProperties[i].value + "\n";
 			}
+			i++;
+			$("#copyProperties").val(valProperties);
 		}
 	}
 
@@ -780,7 +820,65 @@
 	 * @author JJACQUES
 	 */
 	function generateViewXml() {
+		require("fs").readFile("./js/data/template-viewxml.xml", "utf8", function (err, dataXml) {
+			var template = null;
+			if (err) {
+				throw err;
+			}
+			if (dataXml != null) {
+				template = initialiserTemplateViewXML(dataXml);
+				$("#sourceViewXml").text(template);
+				$("#copyViewXml").val(template);
+			}
+		});
+	}
 
+	/**
+	 * Initialiser la page du demarche-flow.
+	 * @author JJACQUES
+	 * @param   {string} dataFlow les données du template du flow
+	 * @returns {string} le template du flow initialisé
+	 */
+	function initialiserTemplateFlow(dataFlow) {
+		try {
+			var template = dataFlow,
+				regExp = null,
+				regExpCapitalize = null,
+				attribut = null;
+			if (app.page != null) {
+				for (attribut in app.page) {
+					if (app.page.hasOwnProperty(attribut)) {
+						regExp = new RegExp("{{" + attribut + "}}", "gi");
+						template = template.replace(regExp, app.page[attribut]);
+						if (app.page[attribut] != null && !$.isFunction(app.page[attribut])) {
+							regExpCapitalize = new RegExp("{[" + attribut + "]}", "gi");
+							template = template.replace(regExp, app.page[attribut].substr(0, 1).toUpperCase() + app.page[attribut].substr(1));
+						}
+					}
+				}
+			}
+			return template;
+		} catch (e) {
+			console.error(e);
+		}
+	}
+
+	/**
+	 * Génère la page flow.
+	 * @author JJACQUES
+	 */
+	function generateFlow() {
+		require("fs").readFile("./js/data/template-flow.xml", "utf8", function (err, dataFlow) {
+			var template = null;
+			if (err) {
+				throw err;
+			}
+			if (dataFlow != null) {
+				template = initialiserTemplateFlow(dataFlow);
+				$("#sourceFlow").text(template);
+				$("#copyFlow").val(template);
+			}
+		});
 	}
 
 	app.api.generate = {
@@ -798,9 +896,15 @@
 					if (dataHtml != null) {
 						template = initialiserTemplate(dataHtml);
 						$("#sourceHTML").text(template);
+						$("#copyHTML").val(template);
 						$("#visualiserHTML").html(template);
+						$("#htmlFileName").text(app.page.prefixPage + ".html");
+
+						generateViewXml();
 
 						generateProperties();
+
+						generateFlow();
 					}
 				});
 			});

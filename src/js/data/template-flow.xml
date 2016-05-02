@@ -1,0 +1,16 @@
+<!-- TODO {{user}} : mettre à jour le <on-start> avec la ligne suivante : -->
+<!-- <on-start>  -->
+	<evaluate expression="teleDeclarationMultipleForm.get{[prefixPage]}Form()" result="flowScope.{{prefixPage}}Form" />
+<!-- </on-start>  -->
+
+
+<!-- Page : {{prefixPage}} -->
+<!-- TODO {{user}} : définir la destination de la transition "precedent" -->
+<!-- TODO {{user}} : définir la destination de la transition "suivant" -->
+<view-state id="{{prefixPage}}" model="{{model}}">
+	<on-entry>
+		<evaluate expression="initialiserPageAction.initialiser{[prefixPage]}(flowRequestContext)" />
+	</on-entry>
+	<transition on="precedent" to="{{precedent}}" validate="false" />
+	<transition on="suivant" to="{{suivant}}" />
+</view-state>

@@ -333,6 +333,13 @@ td details .container {
   padding-top: 15px;
   padding-bottom: 15px;
   width: 100%; }
+  /* line 11, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_onglet.scss */
+  .onglet-content textarea.copy {
+    position: absolute;
+    left: -100px;
+    top: -100px;
+    width: 0px;
+    height: 0px; }
 
 /* line 2, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_atelier.scss */
 #tabAtelier .menu {
@@ -536,6 +543,13 @@ td details .container {
   /* line 21, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_html.scss */
   #tabHtml .html-content .visualiserHTML {
     display: none; }
+  /* line 25, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_html.scss */
+  #tabHtml .html-content #htmlFileName {
+    background-color: #FEFEFE;
+    padding: 5px 10px;
+    font-weight: bold;
+    border-radius: 5px 5px 0 0;
+    margin: 0 15px; }
 
 /* line 2, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_properties.scss */
 #tabProperties .menu {
@@ -555,5 +569,45 @@ td details .container {
     /* line 16, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_properties.scss */
     #tabProperties .messages-content .messages-page .cleProperties {
       cursor: pointer; }
+
+/* line 2, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_viewxml.scss */
+#tabViewXml .menu {
+  position: absolute;
+  height: 60px;
+  width: 100%;
+  padding: 15px;
+  background-color: #333; }
+
+/* line 9, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_viewxml.scss */
+#tabViewXml .view-content {
+  position: absolute;
+  top: 60px; }
+  /* line 13, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_viewxml.scss */
+  #tabViewXml .view-content pre#sourceViewXml {
+    display: block;
+    overflow: auto;
+    width: calc(100% - 30px);
+    margin: 0 15px;
+    white-space: pre-wrap; }
+
+/* line 2, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_flow.scss */
+#tabDemarcheFlow .menu {
+  position: absolute;
+  height: 60px;
+  width: 100%;
+  padding: 15px;
+  background-color: #333; }
+
+/* line 9, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_flow.scss */
+#tabDemarcheFlow .flow-content {
+  position: absolute;
+  top: 60px; }
+  /* line 13, C:/Users/Jonathan/Documents/Projets/Page Generator/src/css/sass/_flow.scss */
+  #tabDemarcheFlow .flow-content pre#sourceFlow {
+    display: block;
+    overflow: auto;
+    width: calc(100% - 30px);
+    margin: 0 15px;
+    white-space: pre-wrap; }
 
 /*# sourceMappingURL=style.css.map */

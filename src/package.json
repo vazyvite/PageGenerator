@@ -1,6 +1,6 @@
 {
 	"name": "PSL-PG",
-	"version": "0.0.1",
+	"version": "0.0.3",
 	"description": "Page Generator pour les démarches PSL",
 	"author": "Jonathan JACQUES <jonathan.jacques@capgemini.com>",
 	"main": "index.html",

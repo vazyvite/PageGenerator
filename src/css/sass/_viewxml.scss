@@ -1,4 +1,4 @@
-#tabHtml {
+#tabViewXml {
 	.menu {
 		position: absolute;
 		height: 60px;
@@ -6,28 +6,16 @@
 		padding: 15px;
 		background-color: $color_gris3;
 	}
-	.html-content {
+	.view-content {
 		position: absolute;
 		top: 60px;
 
-		pre#sourceHTML {
+		pre#sourceViewXml {
 			display: block;
 			overflow: auto;
 			width: calc(100% - 30px);
 			margin: 0 15px;
 			white-space: pre-wrap;
-		}
-
-		.visualiserHTML {
-			display: none;
-		}
-
-		#htmlFileName {
-			background-color: #FEFEFE;
-			padding: 5px 10px;
-			font-weight: bold;
-			border-radius: 5px 5px 0 0;
-			margin: 0 15px;
 		}
 	}
 }

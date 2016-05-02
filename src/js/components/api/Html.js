@@ -42,7 +42,7 @@
 				afficherVisualisation(this);
 			});
 
-			new Clipboard('#selectHTML');
+//			new Clipboard('#selectHTML');
 		}
 	};
 }(jQuery));

@@ -7,4 +7,12 @@
 	padding-top: 15px;
 	padding-bottom: 15px;
 	width: 100%;
+
+	textarea.copy {
+		position: absolute;
+		left: -100px;
+		top: -100px;
+		width: 0px;
+		height: 0px;
+	}
 }

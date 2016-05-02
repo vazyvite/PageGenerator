@@ -9,6 +9,8 @@ function Page() {
 	that.prefixDemarche = "";
 	that.prefixPage = "";
 	that.user = "";
+	that.codeXitiDemarche = "";
+	that.codeXitiPage = "";
 
 	/**
 	 * Set la valeur dans l'attribut identifié par key.
@@ -60,6 +62,18 @@ function Page() {
 				requis: true,
 				infobulle: "Identifiant permettant d'identifier la page dans le code Javascript.",
 				valeurDefault: localStorage.getItem("idPage")
+			}, {
+				label: "Identifiant XITI de la démarche",
+				id: "msp_xitiDemarche",
+				requis: false,
+				infobulle: "Identifiant XITI permettant d'identifier la démarche.",
+				valeurDefault: localStorage.getItem("codeXitiDemarche")
+			}, {
+				label: "Identifiant XITI de la page",
+				id: "msp_xitiPage",
+				requis: false,
+				infobulle: "Identifiant XITI permettant d'identifier la page.",
+				valeurDefault: localStorage.getItem("codeXitiPage")
 			}]
 		};
 
@@ -67,20 +81,27 @@ function Page() {
 		app.core.modal.drawModal("modalSettingsPage", "Informations sur la Page", formModal, false, function (event, $modal) {
 			var validationModal = app.core.validation.valideForm($modal);
 			if (validationModal) {
-				// initialisation de la page Atelier
-				app.api.atelier.init();
-				// initialisation de la page HTML
-				app.api.html.init();
-				// initialisation de la page Properties
-				app.api.properties.init();
-
 				// sauvegarde des informations de la page dans le localStorage et dans le model Page
 				that.setValue("idPage", $modal.find("#msp_idPage").val());
 				that.setValue("model", $modal.find("#msp_model").val());
 				that.setValue("prefixDemarche", $modal.find("#msp_prefixDemarche").val());
 				that.setValue("prefixPage", $modal.find("#msp_prefixPage").val());
 				that.setValue("user", $modal.find("#msp_user").val());
+				that.setValue("codeXitiDemarche", $modal.find("#msp_xitiDemarche").val());
+				that.setValue("codeXitiPage", $modal.find("#msp_xitiPage").val());
 				app.page = that;
+
+				// initialisation de la page Atelier
+				app.api.atelier.init();
+				// initialisation de la page HTML
+				app.api.html.init();
+				// initialisation de la page Properties
+				app.api.properties.init();
+				// initialisation de la page ViewXML
+				app.api.viewxml.init();
+
+				new Clipboard('.selectClipboard');
+
 				return true;
 			} else {
 				return false;
