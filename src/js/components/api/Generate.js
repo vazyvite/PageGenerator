@@ -589,7 +589,6 @@
 	 */
 	function initialiserGeneration() {
 		listeID = [];
-//		listeProperties = [];
 	}
 
 	/**
@@ -661,20 +660,14 @@
 		if ($atelier != null) {
 			initialiserGeneration();
 			$atelier.each(function () {
-				var option = null,
-					$uiElement = $(this),
+				var $uiElement = $(this),
 					typeElement = $uiElement.data("uielement"),
 					options = $uiElement.data("datagen"),
 					$element = null;
 
 				if ($uiElement != null && options != null && typeElement != null) {
 					if (typeElement.type == "form" || typeElement.type == "textform") {
-						// si l'élément est de type form ou textform
-//						for (option in options) {
-//							if (options.hasOwnProperty(option)) {
 						$element = initialiserFormElement(typeElement, options);
-//							}
-//						}
 					} else if (typeElement.type == "text") {
 						if (typeElement.name == "PARA-GRAPH") {
 							$element = $("<p>").attr({
@@ -851,8 +844,8 @@
 						regExp = new RegExp("{{" + attribut + "}}", "gi");
 						template = template.replace(regExp, app.page[attribut]);
 						if (app.page[attribut] != null && !$.isFunction(app.page[attribut])) {
-							regExpCapitalize = new RegExp("{[" + attribut + "]}", "gi");
-							template = template.replace(regExp, app.page[attribut].substr(0, 1).toUpperCase() + app.page[attribut].substr(1));
+							regExpCapitalize = new RegExp("{\\[" + attribut + "\\]}", "gi");
+							template = template.replace(regExpCapitalize, app.page[attribut].substr(0, 1).toUpperCase() + app.page[attribut].substr(1));
 						}
 					}
 				}
@@ -881,6 +874,14 @@
 		});
 	}
 
+	function generateJava() {
+		var template = app.api.java.generateJava(function (template) {
+			$("#sourceJava").text(template);
+			$("#copyJava").val(template);
+			$("#htmlFileName").text(app.page.model + ".java");
+		});
+	}
+
 	app.api.generate = {
 		/**
 		 * Méthode d'initialisation.
@@ -898,13 +899,14 @@
 						$("#sourceHTML").text(template);
 						$("#copyHTML").val(template);
 						$("#visualiserHTML").html(template);
-						$("#htmlFileName").text(app.page.prefixPage + ".html");
+						$("#javaFileName").text(app.page.prefixPage + ".html");
 
 						generateViewXml();
-
 						generateProperties();
-
 						generateFlow();
+						generateJava();
+
+						app.core.alert.create("success", "Génération terminée.");
 					}
 				});
 			});
