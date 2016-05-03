@@ -40,8 +40,8 @@
 					<li role="presentation"><a href="#tabHtml" aria-controls="tabHtml" role="tab" data-toggle="tab">HTML</a></li>
 					<li role="presentation"><a href="#tabProperties" aria-controls="settings" role="tab" data-toggle="tab">properties</a></li>
 					<li role="presentation"><a href="#tabViewXml" aria-controls="tabViewXml" role="tab" data-toggle="tab">view.xml</a></li>
-					<li role="presentation"><a class="beta" href="#tabDemarcheFlow" aria-controls="tabDemarcheFlow" role="tab" data-toggle="tab">demarche-flow</a></li>
-					<li role="presentation"><a class="alpha" href="#tabJava" aria-controls="tabJava" role="tab" data-toggle="tab">Java</a></li>
+					<li role="presentation"><a href="#tabDemarcheFlow" aria-controls="tabDemarcheFlow" role="tab" data-toggle="tab">demarche-flow</a></li>
+					<li role="presentation"><a href="#tabJava" aria-controls="tabJava" role="tab" data-toggle="tab">Java</a></li>
 				</ul>
 
 				<!-- Tab panes -->
@@ -70,8 +70,15 @@
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane" id="tabJava">
+						<div class="menu">
+							<button type="button" class="btn btn-default selectClipboard" id="selectJava" data-clipboard-target="#copyJava"><span class="glyphicon glyphicon-screenshot"></span> Copier</button>
+						</div>
 						<div class="java-content onglet-content">
-							<div class="java-page"></div>
+							<div id="javaFileName">Nom du fichier Java inconnu</div>
+							<div class="java-page">
+								<pre id="sourceJava">Cliquer sur le bouton <button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-flash"></span> Générer</button> pour générer le code Java de la page.</pre>
+								<textarea class="copy" id="copyJava"></textarea>
+							</div>
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane" id="tabViewXml">
@@ -123,10 +130,12 @@
 		<script type="text/javascript" src="js/model/Infobulle.js"></script>
 		<script type="text/javascript" src="js/components/core/Validation.js"></script>
 		<script type="text/javascript" src="js/components/core/Modal.js"></script>
+		<script type="text/javascript" src="js/components/core/Alert.js"></script>
 		<script type="text/javascript" src="js/components/api/Atelier.js"></script>
 		<script type="text/javascript" src="js/components/api/Html.js"></script>
 		<script type="text/javascript" src="js/components/api/Generate.js"></script>
 		<script type="text/javascript" src="js/components/api/Properties.js"></script>
 		<script type="text/javascript" src="js/components/api/ViewXml.js"></script>
+		<script type="text/javascript" src="js/components/api/Java.js"></script>
     </body>
 </html>
