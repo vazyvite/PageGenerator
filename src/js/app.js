@@ -22,6 +22,10 @@
 				$("#btnOptions").on("click", function () {
 					app.page.drawModal();
 				});
+
+				$(".selectClipboard").on("click", function () {
+					app.core.alert.create("success", "Code copié dans le presse papier.");
+				});
 			}
 		},
 		api: {}
