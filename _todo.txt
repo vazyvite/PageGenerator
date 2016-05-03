@@ -11,6 +11,7 @@ EVO043 - L'application doit générer au mieux les relations RGAA entre les él�
 EVO044 - Lorsque l'utilisateur survol un UIElement positioné sur la page, une option de déplacement apparait
 EVO047 - L'onglet Java doit me présenter le résultat de la génération Java du teleDeclaration.java
 EVO048 - L'utilisateur peut ajouter des composants communs sur sa page
+EVO049 - L'utilisateur est aidé dans sa saisie des formats de données
 
 
 
