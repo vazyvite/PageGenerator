@@ -1,4 +1,4 @@
-#tabDemarcheFlow {
+#tabJava {
 	.menu {
 		position: absolute;
 		height: 60px;
@@ -6,17 +6,29 @@
 		padding: 15px;
 		background-color: $color_gris3;
 	}
-	.flow-content {
+	.java-content {
 		position: absolute;
 		top: 60px;
 
-		pre#sourceFlow {
+		pre#sourceJava {
 			display: block;
 			overflow: auto;
 			width: calc(100% - 30px);
 			margin: 0 15px;
 			white-space: pre-wrap;
 			margin-bottom: 50px;
+		}
+
+		.visualiserJava {
+			display: none;
+		}
+
+		#javaFileName {
+			background-color: #FEFEFE;
+			padding: 5px 10px;
+			font-weight: bold;
+			border-radius: 5px 5px 0 0;
+			margin: 0 15px;
 		}
 	}
 }

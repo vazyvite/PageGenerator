@@ -9,17 +9,22 @@
 		overflow-y: auto;
 
 		.item {
-			color: $color_blanc;
-			margin: auto;
 			padding: 0 5px;
-			width: 75px;
-			height: 75px;
+			width: 45px;
+			height: 45px;
 			border: 1px double $color_gris5;
 			border-radius: 3px;
 			cursor: -webkit-grab;
 			margin-bottom: 3px;
+			display: inline-block;
+			margin: 5px;
+			overflow: hidden;
+			font-size: 10px;
+			color: $color_gris3;
+			background-color: $color_gris_blanc;
 
-			&:focus {
+			&:focus,
+			&:hover {
 				outline: $color_bleu_clair auto 5px;
 				outline-offset: -2px;
 			}
