@@ -1,6 +1,6 @@
 <!-- TODO {{user}} : mettre à jour le <on-start> avec la ligne suivante : -->
 <!-- <on-start>  -->
-	<evaluate expression="teleDeclarationMultipleForm.get{[prefixPage]}Form()" result="flowScope.{{prefixPage}}Form" />
+	<evaluate expression="teleDeclarationMultipleForm.get{[model]}()" result="flowScope.{{model}}" />
 <!-- </on-start>  -->
 
 
