@@ -1,5 +1,5 @@
 /*jslint eqeq: true, plusplus: true*/
-/*globals jQuery, app, prompt, Clipboard*/
+/*globals jQuery, app, prompt*/
 (function ($) {
 	"use strict";
 
@@ -74,8 +74,6 @@
 			});
 
 			addRootProperties();
-
-//			new Clipboard('#selectProperties');
 		},
 
 		/**

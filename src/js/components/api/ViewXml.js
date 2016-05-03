@@ -1,5 +1,5 @@
 /*jslint eqeq: true, plusplus: true*/
-/*globals jQuery, app, Clipboard*/
+/*globals jQuery, app*/
 (function ($) {
 	"use strict";
 
@@ -10,7 +10,6 @@
 		 * @author JJACQUES
 		 */
 		init: function () {
-//			new Clipboard('#selectViewXML');
 		}
 	};
 }(jQuery));

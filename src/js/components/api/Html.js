@@ -1,5 +1,5 @@
 /*jslint eqeq: true, plusplus: true*/
-/*globals jQuery, app, Clipboard*/
+/*globals jQuery, app*/
 (function ($) {
 	"use strict";
 
@@ -41,8 +41,6 @@
 			$("#showVisualiser").on("click", function () {
 				afficherVisualisation(this);
 			});
-
-//			new Clipboard('#selectHTML');
 		}
 	};
 }(jQuery));
