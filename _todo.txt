@@ -1,16 +1,17 @@
-Evolutions(000)
+Evolutions(048)
 ---------------------------------------
 EVO015 - le message présentant les champs obligatoires du template (haut) n'est généré que si au moins 1 champ est obligatoire
 EVO029 - Les UIElements de type composant ont les options suivantes: (paramétrés selon chaque composant) + gestion des dépendances
 EVO030 - La page gère une liste de dépendances liées aux JS requis pour le bon fonctionnement des composants
-EVO032 - Lorsque l'utilisateur clique sur le bouton de génération, il est automatiquement redirigé vers l'onglet HTML
-EVO032 - L'onglet Java doit me présenter le résultat de la génération Java du modèle ainsi que le contenu à insérer dans le teleDeclaration.java
 EVO039 - Un champ peut voir sa largeur (bootstrap) être modifiée (12|6|4)
 EVO040 - Le commit envoi les modifications dans les fichiers correspondants
 EVO041 - L'EVO040 nécessite l'identification du projet par le biais d'options supplémentaires
 EVO042 - Ajout d'un bouton Commit activé uniquement après génération et hors de toute modification dans le menu principal de l'application pour le support de l'EVO040
 EVO043 - L'application doit générer au mieux les relations RGAA entre les éléments (critères à définir)
 EVO044 - Lorsque l'utilisateur survol un UIElement positioné sur la page, une option de déplacement apparait
+EVO047 - L'onglet Java doit me présenter le résultat de la génération Java du teleDeclaration.java
+EVO048 - L'utilisateur peut ajouter des composants communs sur sa page
+
 
 
 Anomalies(000)
@@ -26,6 +27,7 @@ EVO012 - Un UIElement de type text est positionnable sur un UIElement de type bl
 EVO013 - Un UIElement de type bloc est positionnable sur un UIElement de type racine
 EVO027 - Les UIElements de type bloc ont les options suivantes: 
 EVO028 - Les UIElements de type form ont les options suivantes: (voir spec)
+EVO032 - Lorsque l'utilisateur clique sur le bouton de génération, il est automatiquement redirigé vers l'onglet HTML
 
 
 Releases Notes
@@ -64,3 +66,10 @@ EVO036 - La page doit traiter la liste des messages properties présents
 EVO033 - L'onglet view.xml doit me présenter le résultat de la génération XML de la définition de la vue
 EVO034 - L'onglet demarche-flow.xml doit me présenter le résultat de la génération XML de la définition webflow de la vue
 EVO045 - La page HTML doit présenter le nom du fichier HTML généré
+
+0.0.4
+EVO045 - Après la génération l'utilisateur est averti de la fin de l'action par le biais d'une alerte
+EVO046 - La page Java présente la classe liée à la page
+EVO032 - L'onglet Java doit me présenter le résultat de la génération Java du modèle
+
+0.0.5
