@@ -12,6 +12,11 @@ EVO044 - Lorsque l'utilisateur survol un UIElement positioné sur la page, une o
 EVO047 - L'onglet Java doit me présenter le résultat de la génération Java du teleDeclaration.java
 EVO048 - L'utilisateur peut ajouter des composants communs sur sa page
 EVO049 - L'utilisateur est aidé dans sa saisie des formats de données
+EVO050 - L'utilisateur doit pouvoir voir à tout moment dans quelle démarche et sur quelle page il travaille.
+EVO051 - L'utilisateur peut sélectionner au clavier les uiElements
+EVO052 - Lorsque l'utilisateur tape ENTREE sur un uiElement sélectionné, ce dernier se rajoute à la fin de la page en cours
+EVO053 - L'utilisateur a accès à une saisie détaillée des valeurs de properties (pour y intégrer les notions de liens) 
+EVO054 - Après la saisie d'une valeur de propertie, un analyse est lancée pour identifier les éléments liens et liste présents et vérifier qu'ils respectent les design patterns de ces éléments
 
 
 
